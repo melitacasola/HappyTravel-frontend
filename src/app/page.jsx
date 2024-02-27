@@ -1,3 +1,4 @@
+import LoginUser from "./components/login-user/Login_User";
 
 export default function Home() {
   return (
@@ -5,4 +6,5 @@ export default function Home() {
       <h1>Hola Fefy</h1>
     </main>
   );
+ 
 }
