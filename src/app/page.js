@@ -1,4 +1,5 @@
 import Button from "./components/Button/Button.jsx";
+import Input from "./components/Input/Input.jsx";
 
 export default function Home() {
   return (
@@ -6,6 +7,7 @@ export default function Home() {
       <h1>Hola Fefy</h1>
       <Button to="#" text="Aceptar" isPrimary={true} />
       <Button to="#" text="Cancelar" isPrimary={false} />
+      <Input type="text" placeholder="Escribe tu nombre ..." value="" validationMessage="Nombre requerido" />
     </main>
   );
 }
