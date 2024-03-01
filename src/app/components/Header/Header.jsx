@@ -1,17 +1,29 @@
-"use client";
+import React from 'react';
+import Logo from '../Logo/Logo';
+import SearchComponent from '../SearchComponent/SearchComponent';
+import NavBar from '../NavBar/NavBar';
 
-export default function Header() {
-
+const Header = () => {
     return (
+        <header className="flex items-center justify-between   mx-6 mt-4">
+            <img
+                className="absolute w-[1440px] h-[2px] top-[78px] left- bg-blue-600 mt-2"
+                alt="Line"
+                src="Line-4.svg"
+            />
+            <div className="flex items-center">
+                <Logo />
+            </div>
+            <div className="flex items-center mx-6 gap-5 ">
+                <SearchComponent />
 
-        <div className="relative w-[1300px] h-[94px]">
-            <img className="absolute w-[1300px] h-[2px] top-[92px] left-0" alt="Line" src="line-4.svg" />
-            <AvatarIcon className="!absolute !w-[40px] !h-[40px] !top-[38px] !left-[1260px]" />
-            <HomeIcon className="!absolute !w-[40px] !h-[40px] !top-[38px] !left-[1203px]" />
-            <Logo className="!absolute !w-[165px] !h-[78px] !top-0 !left-0" />
-            <Searcher className="!absolute !left-[986px] !top-[39px]" />
-        </div>
+                <NavBar>
+
+                </NavBar>
+            </div>
+        </header>
     );
 };
 
+export default Header;
 
