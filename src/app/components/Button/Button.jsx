@@ -3,11 +3,11 @@
 const Button = ({ to, text, isPrimary }) => {
   const buttonStyle = `${
     isPrimary ? "bg-primary" : "bg-secondary"
-  } text-bg-color sm:px-8 sm:py-1 rounded-full cursor-pointer text-xl hover:bg-opacity-80 transition-colors duration-300`;
+  } text-bg-color px-8 py-1 rounded-full cursor-pointer text-xl hover:bg-opacity-80 transition-colors duration-300 flex`;
 
   return (
     <button>
-      <a href={to} target="_blank" className={buttonStyle}>
+      <a href={to} className={buttonStyle}>
         {text}
       </a>
     </button>
