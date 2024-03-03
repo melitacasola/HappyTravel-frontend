@@ -1,8 +1,8 @@
 import { Jaldi } from "next/font/google";
 import "./globals.css";
 import Header from './components/Header/Header';
-// import Form from "./components/RegisterUserForm/RegisterUserForm";
-import LoginUser from "./components/login-user/Login_User";
+import LoginUser from './components/LoginUser/LoginUser';
+
 
 const jaldi = Jaldi({
   subsets: ["latin"],
@@ -19,9 +19,9 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={`${jaldi.className}  bg-white text-text-color font-bold text-[4rem] rounded-full border-primary`}>
         <Header />
-        <h1>hola hemi</h1>
+        
 
-        {/* <LoginUser /> */}
+       
 
 
       </body>
