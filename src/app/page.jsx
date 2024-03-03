@@ -1,4 +1,3 @@
-import LoginUser from "./components/login-user/Login_User";
 
 export default function Home() {
   return (
@@ -7,5 +6,4 @@ export default function Home() {
 
     </main>
   );
- 
 }
