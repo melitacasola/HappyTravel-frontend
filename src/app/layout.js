@@ -19,7 +19,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={`${jaldi.className}  bg-white text-text-color font-bold text-[4rem] rounded-full border-primary`}>
         <Header />
-        
+        <h1>hola hemi</h1>
 
         {/* <LoginUser /> */}
 
