@@ -3,6 +3,7 @@ import "./globals.css";
 import Header from './components/Header/Header';
 import PlaceHolder from './components/PlaceHolder/PlaceHolder';
 import PaginationButton from './components/PaginationButton/PaginationButton'
+import DestinationCard from "./components/Card/DestinationCard";
 
 const jaldi = Jaldi({
   subsets: ["latin"],
@@ -21,6 +22,7 @@ export default function RootLayout({ children }) {
         <Header />
         <PlaceHolder />
         <PaginationButton />
+        <DestinationCard />
         {children}
 
       </body>
