@@ -2,6 +2,7 @@ import React from 'react';
 import Logo from '../Logo/Logo';
 import SearchComponent from '../SearchComponent/SearchComponent';
 import NavBar from '../NavBar/NavBar';
+import NavBarMobile from '../NavBarMobile/NavBarMobile';
 
 const Header = () => {
     return (
@@ -18,6 +19,13 @@ const Header = () => {
 
                     </NavBar>
                 </div>
+
+                <div className="sm:hidden flex items-center gap-6 sm:gap-8">
+                    <NavBarMobile>
+
+                    </NavBarMobile>
+                </div>
+
             </div>
         </header>
     );
