@@ -1,7 +1,7 @@
 import { Jaldi } from "next/font/google";
 import "./globals.css";
 import Header from './components/Header/Header';
-import LoginUser from './components/LoginUser/LoginUser';
+
 
 
 const jaldi = Jaldi({
