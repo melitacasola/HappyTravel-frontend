@@ -1,6 +1,7 @@
 import { Jaldi } from "next/font/google";
 import "./globals.css";
 import Header from "./components/Header/Header";
+import LoggedDestinationCard from "./components/LoggedDestinationCard/LoggedDestinationCard";
 
 const jaldi = Jaldi({
   subsets: ["latin"],
