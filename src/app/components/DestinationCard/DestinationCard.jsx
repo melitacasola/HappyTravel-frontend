@@ -1,6 +1,6 @@
 import React from 'react';
 
-const PlaceHolder = ({ }) => {
+const DestinationCard = ({ }) => {
     return (
 
 
@@ -18,4 +18,4 @@ const PlaceHolder = ({ }) => {
     )
 };
 
-export default PlaceHolder;
+export default DestinationCard ;
