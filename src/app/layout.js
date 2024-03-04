@@ -18,7 +18,9 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={`${jaldi.className}  bg-white text-text-color font-bold text-[4rem] rounded-full border-primary`}>
+      <div className="hidden md:block">
         <Header />
+      </div>
         {/* <PlaceHolder />
         <PaginationButton /> */}
         {children}

@@ -15,7 +15,7 @@ const NewDestinationForm = () => {
                 Crear Destino
             </h1>
             <div className="flex flex-row items-center justify-center bg-white h-full rounded-b-xl pr-1 border-t-2 border-pink-500">
-                <div className="bg-white h-full w-1/2">
+                <div className="bg-white h-full w-1/2 pt-4">
                     <div className="mr-7">
                         <label
                             htmlFor="small-input"
@@ -40,6 +40,11 @@ const NewDestinationForm = () => {
                             id="small-input-2"
                             className="block w-full p-3 rounded-full bg-yellow-100 text-xs input-height shadow-[inset_0px_4px_4px_#00000040]"
                         />
+                        <label
+                            htmlFor="small-input-2"
+                            className="block pt-3 text-xl font-semibold text-blue-500 dark:text-white font-jaldi">
+                            Imagen
+                        </label>
                         <div className="relative inline-block h-auto w-full">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -63,7 +68,7 @@ const NewDestinationForm = () => {
                             />
                         </div>
 
-                        <div className="flex flex-row mt-9 gap-1">
+                        <div className="flex flex-row mt-8 gap-1">
                             <Button type="submit" text="Aceptar" isPrimary={true} />
                             <Button text="Cancelar" isPrimary={false} />
                         </div>
@@ -79,7 +84,7 @@ const NewDestinationForm = () => {
                     <textarea
                         id="message"
                         rows="3"
-                        className=" p-4 my-6 mt-1 h-72 w-full text-sm text-gray-900 bg-yellow-100 rounded-3xl shadow-[inset_0px_4px_4px_#00000040] textarea-height text-transparent font-jaldi"
+                        className=" p-4 my-6 mt-1 h-80 w-full text-sm text-gray-900 bg-yellow-100 rounded-3xl shadow-[inset_0px_4px_4px_#00000040] textarea-height text-transparent font-jaldi"
                         placeholder="Escribe tu mensaje aquí..."
                     ></textarea>
                 </div>
