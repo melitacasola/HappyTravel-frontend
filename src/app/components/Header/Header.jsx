@@ -3,6 +3,7 @@ import Logo from '../Logo/Logo';
 import SearchComponent from '../SearchComponent/SearchComponent';
 import NavBar from '../NavBar/NavBar';
 import NavBarMobile from '../NavBarMobile/NavBarMobile';
+import NavBarLoggedMob from '../NavBarLoggedMob/NavBarLoggedMob';
 
 const Header = () => {
     return (
@@ -24,6 +25,11 @@ const Header = () => {
                     <NavBarMobile>
 
                     </NavBarMobile>
+                </div>
+                <div className="sm:hidden flex items-center gap-6 sm:gap-8">
+                    <NavBarLoggedMob >
+
+                    </NavBarLoggedMob >
                 </div>
 
             </div>
