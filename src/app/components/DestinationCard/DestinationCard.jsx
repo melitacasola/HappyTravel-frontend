@@ -1,21 +1,43 @@
-import React from 'react';
-
-const DestinationCard = ({ }) => {
-    return (
+import Image from 'next/image';
 
 
-        <div className="place w-[300px] h-[373px]">
-            <div className="relative h-[373px]">
-                <img className="w-[300px] h-[300px] top-0 left=0 object-cover rounded-[20px_20px_10px_20px]" alt="Mask group" src='./Assets/images/1.svg' />
-                <div className="yellowbox justify-center w-[300px] h-[100px] top-0 left-0 bg-yellow-100 rounded-[0px_0px_20px_20px]" />
-                <div className="absolute w-[207px] h-[44px] top-[328px] pb-8 left-[20px] flex items-center [font-family:'Jaldi-Regular',Helvetica] font-bold text-blue-600 text-[25px] tracking-[0] leading-[normal]">Name in here
+const DestinationCard = ({data}) => {
+  return (
+    <div className="rounded-[20px] max-w-xs mx-auto md:max-w-none md:w-1/4" style={{ backgroundColor: '#FBFDCE' }}>
+      <div className="overflow-hidden mb-6 md:mb-0">
+        <ul>
+          {
+            data?.map((item) => (
+              <li key={item.attributes.id}>
+                <div className="w-full h-72 relative">
+                    
+                  {/* <Image
+                    src={item.attributes.image}
+                    alt={item.attributes.title}
+                    layout="fill"
+                    objectFit="cover"
+                    className="rounded-[20px_20px_0_0]"
+                  /> */}
                 </div>
-                <div className="absolute w-[207px] h-[44px] top-[328px] left-[20px] pt-8  flex items-center [font-family:'Jaldi-Regular',Helvetica] font-normal text-blue-500 text-[20px] tracking-[0] leading-[normal]">Country
+                <div className="p-4">
+                  <h5 className="text-2xl font-semibold" style={{ color: '#0079FF' }}>{item.attributes.title}</h5>
+                  <p className="text-xl font-normal" style={{ color: '#0079FF' }}>{item.attributes.location}</p>
+                  
                 </div>
-            </div>
-        </div>
+              </li>
+            ))
+          }
 
-    )
+        </ul>
+        
+      </div>
+    </div>
+  );
 };
 
-export default DestinationCard ;
+export default DestinationCard;
+
+
+
+
+
