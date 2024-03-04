@@ -1,30 +1,30 @@
-"use client";
-
 import Image from 'next/image';
 import ImgEjemplo from "../../../../public/Assets/images/1.svg";
 
-const DestinationCard = ({ children }) => { // Agregamos la propiedad children aquí
-  const imageUrl = "./Assets/images/1.svg";
-  const title = "Islas Azores";
-  const country = "Portugal";
-
+const DestinationCard = ({
+  imageUrl = ImgEjemplo,
+  title = "Islas Azores",
+  country = "Portugal",
+  topChildren = null,
+  bottomChildren = null
+}) => {
   return (
-    <div className="rounded-[20px_20px_20px_20px] max-w-xs mx-auto md:max-w-none md:w-1/4" style={{ backgroundColor: '#FBFDCE' }}>
+    <div className="rounded-[20px] max-w-xs mx-auto md:max-w-none md:w-1/4" style={{ backgroundColor: '#FBFDCE' }}>
       <div className="overflow-hidden mb-6 md:mb-0">
-        
         <div className="w-full h-72 relative">
+          {topChildren}
           <Image
-            className="rounded-[20px_20px_10px_20px]"
-            src={ImgEjemplo}
+            src={imageUrl}
             alt={title}
             layout="fill"
             objectFit="cover"
+            className="rounded-[20px_20px_0_0]"
           />
         </div>
         <div className="p-4">
-          <h5 className="text-2xl font-semibold mb-2" style={{ color: '#0079FF' }}>{title}</h5>
+          <h5 className="text-2xl font-semibold" style={{ color: '#0079FF' }}>{title}</h5>
           <p className="text-xl font-normal" style={{ color: '#0079FF' }}>{country}</p>
-          {children} {/* Renderizamos los children aquí */}
+          {bottomChildren}
         </div>
       </div>
     </div>
@@ -32,6 +32,7 @@ const DestinationCard = ({ children }) => { // Agregamos la propiedad children a
 };
 
 export default DestinationCard;
+
 
 
 
