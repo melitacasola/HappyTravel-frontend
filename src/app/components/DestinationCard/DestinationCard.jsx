@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import ImgEjemplo from "../../../../public/Assets/images/1.svg";
 
-const DestinationCard = () => {
+const DestinationCard = ({ children }) => { // Agregamos la propiedad children aquí
   const imageUrl = "./Assets/images/1.svg";
   const title = "Islas Azores";
   const country = "Portugal";
@@ -22,8 +22,9 @@ const DestinationCard = () => {
           />
         </div>
         <div className="p-4">
-          <h5 className="text-2xl font-semibold mb-2 style={{ color: '#0079FF' }}">{title}</h5>
-          <p className="text-xl font-normal style={{ color: '#0079FF' }}">{country}</p>
+          <h5 className="text-2xl font-semibold mb-2" style={{ color: '#0079FF' }}>{title}</h5>
+          <p className="text-xl font-normal" style={{ color: '#0079FF' }}>{country}</p>
+          {children} {/* Renderizamos los children aquí */}
         </div>
       </div>
     </div>
@@ -31,5 +32,8 @@ const DestinationCard = () => {
 };
 
 export default DestinationCard;
+
+
+
 
 
