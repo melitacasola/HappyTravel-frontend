@@ -1,8 +1,8 @@
 import { Jaldi } from "next/font/google";
 import "./globals.css";
 import Header from './components/Header/Header';
-import PlaceHolder from './components/PlaceHolder/PlaceHolder';
-import PaginationButton from './components/PaginationButton/PaginationButton'
+import PaginationButton from './components/PaginationButton/PaginationButton';
+import DestinationCard from "./components/DestinationCard/DestinationCard";
 
 const jaldi = Jaldi({
   subsets: ["latin"],
@@ -19,7 +19,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={`${jaldi.className}  bg-white text-text-color font-bold text-[4rem] rounded-full border-primary`}>
         <Header />
-        <PlaceHolder />
+        <DestinationCard />
         <PaginationButton />
         {children}
 
