@@ -7,6 +7,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        jaldi: ['Jaldi', 'sans-serif'],
+      },
       colors: {
         "bg-color": "#FBFDCE",
         "text-color": "#0079FF",

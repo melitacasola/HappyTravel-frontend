@@ -16,8 +16,12 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="es">
-      <body className={`${jaldi.className}  bg-white text-text-color text-base font-normal`}>
-        <Header />
+      <body
+        className={`${jaldi.className}  bg-white text-text-color font-bold text-[4rem] rounded-full border-primary`}
+      >
+        <div className="hidden md:block">
+          <Header />
+        </div>
         {children}
       </body>
     </html>
