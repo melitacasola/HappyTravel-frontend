@@ -1,6 +1,7 @@
 import { Jaldi } from "next/font/google";
 import "./globals.css";
 import Header from './components/Header/Header';
+import LoggedDestinationCard from "./components/LoggedDestinationCard/LoggedDestinationCard";
 
 
 
@@ -19,7 +20,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={`${jaldi.className}  bg-white text-text-color font-bold text-[4rem] rounded-full border-primary`}>
         <Header />
-        
+        <LoggedDestinationCard />
 
        
 
