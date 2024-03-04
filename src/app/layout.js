@@ -1,8 +1,13 @@
 import { Jaldi } from "next/font/google";
 import "./globals.css";
+import Header from './components/Header/Header';
 
-const jaldi = Jaldi({ subsets: ["latin"],
-    weight: ['700' , '400'] });  
+
+
+const jaldi = Jaldi({
+  subsets: ["latin"],
+  weight: ['700', '400']
+});
 
 export const metadata = {
   title: "Happy Travel",
@@ -12,7 +17,15 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`${jaldi.className}  bg-white text-text-color font-bold text-[4rem] rounded-full border-primary`}>{children}</body>
+      <body className={`${jaldi.className}  bg-white text-text-color font-bold text-[4rem] rounded-full border-primary`}>
+        <Header />
+        
+
+       
+
+
+      </body>
     </html>
+
   );
 }
