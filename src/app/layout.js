@@ -4,6 +4,8 @@ import Header from './components/Header/Header';
 
 
 
+
+
 const jaldi = Jaldi({
   subsets: ["latin"],
   weight: ['700', '400']
@@ -20,9 +22,8 @@ export default function RootLayout({ children }) {
       <body className={`${jaldi.className}  bg-white text-text-color font-bold text-[4rem] rounded-full border-primary`}>
         <Header />
         
-
-       
-
+      
+        {children}
 
       </body>
     </html>
