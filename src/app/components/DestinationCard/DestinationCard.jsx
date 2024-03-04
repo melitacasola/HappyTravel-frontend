@@ -1,3 +1,4 @@
+"use client";
 
 import Image from 'next/image';
 import ImgEjemplo from "../../../../public/Assets/images/1.svg";
