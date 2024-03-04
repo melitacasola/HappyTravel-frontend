@@ -5,8 +5,7 @@ import Image from 'next/image';
 export const EditButton = () => (
   <div className="cursor-pointer">
     <Image
-      src="/assets/edit-icon.svg" // Asegúrate de que la ruta sea correcta
-      alt="Editar"
+      src="/assets/edit-icon.svg"
       width={24}
       height={24}
     />
@@ -16,7 +15,7 @@ export const EditButton = () => (
 export const DeleteButton = () => (
   <div className="cursor-pointer">
     <Image
-      src="/assets/delete-icon.svg" // Asegúrate de que la ruta sea correcta
+      src="/assets/delete-icon.svg"
       alt="Eliminar"
       width={24}
       height={24}
