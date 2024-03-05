@@ -6,7 +6,7 @@ const NavBar = () => {
         <nav>
             <ul className="flex items-center space-x-4">
                 <li>
-                    <Link href="/home">
+                    <Link href="/">
                         <img
                             src='./Assets/Home-icon.svg'
                             alt="Home icon"
