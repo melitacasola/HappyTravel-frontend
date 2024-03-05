@@ -1,4 +1,4 @@
-'use client'
+
 
 import { useState, useEffect } from 'react';
 
@@ -15,8 +15,8 @@ export const useFetchApi = (url) => {
                 throw new Error('Network response was not ok');
             }
             const data = await response.json();
+            setData(data);
             
-            setData(data.data);
         } catch (error) {
             setError(error);
         } finally {
