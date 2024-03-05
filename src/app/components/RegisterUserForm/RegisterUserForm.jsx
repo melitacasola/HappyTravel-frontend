@@ -5,7 +5,7 @@ import Button from "../Button/Button.jsx";
 import Link from "next/link";
 
 const Form = () => {
-  const registerWrapper = `border-4 rounded-3xl border-bg-color px-8 py-4`;
+  const registerWrapper = `border-4 rounded-3xl border-bg-color px-8 py-4 mx-auto my-20 max-w-sm`;
 
   const titleRegister = `text-2xl text-center text-secondary border-b border-secondary pb-2 mb-8`;
 
