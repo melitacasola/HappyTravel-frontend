@@ -2,8 +2,8 @@ import React from 'react';
 import Logo from '../Logo/Logo';
 import SearchComponent from '../SearchComponent/SearchComponent';
 import NavBar from '../NavBar/NavBar';
-import NavBarMobile from '../NavBarMobile/NavBarMobile';
-import NavBarLoggedMob from '../NavBarLoggedMob/NavBarLoggedMob';
+import NavBarMobile from '../NavBar/NavBarMobile/NavBarMobile';
+import NavBarLoggedMob from '../NavBar/NavBarLoggedMob/NavBarLoggedMob';
 
 const Header = () => {
     return (
