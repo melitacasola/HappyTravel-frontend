@@ -17,14 +17,14 @@ const LoginUser = () => {
     e.preventDefault()
     setLoading(true)
 
-    axios.post('/api/', {
+    axios.post('/api/login', {
       email,
       password,
     })
     .then((response) => {
       if (response.status === 200) {
        
-        router.push('/')
+        router.push('/details/2')
       }
     })
     .catch((error) => {

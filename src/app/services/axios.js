@@ -10,3 +10,4 @@ export const getDestinations = async () => {
     throw error.response.data;
   }
 };
+
