@@ -25,7 +25,8 @@ const NewDestinationMobile = ({title}) => {
                     <input
                         type="text"
                         id="small-input"
-                        className="block w-full p-3 rounded-full bg-yellow-100 text-xs input-height shadow-[inset_0px_4px_4px_#00000040]"
+                        className="block w-full p-3 rounded-full bg-yellow-100 text-xs input-height shadow-[inset_0px_4px_4px_#00000040] placeholder:text-blue-500 placeholder:text-lg placeholder:font-light"
+                        placeholder="Escribe tu nombre..."
                     />
 
                     <label
@@ -37,7 +38,8 @@ const NewDestinationMobile = ({title}) => {
                     <input
                         type="text"
                         id="small-input-2"
-                        className="block w-full p-3 rounded-full bg-yellow-100 text-xs input-height shadow-[inset_0px_4px_4px_#00000040]"
+                        className="block w-full p-3 rounded-full bg-yellow-100 text-xs input-height shadow-[inset_0px_4px_4px_#00000040] placeholder:text-blue-500 placeholder:text-lg placeholder:font-light"
+                        placeholder="Escribe tu nombre..."
                     />
 
                     <label
@@ -79,11 +81,11 @@ const NewDestinationMobile = ({title}) => {
                     <textarea
                         id="message"
                         rows="3"
-                        className=" p-4 my-6 mx-0 mt-1 h-72 w-full text-sm text-gray-900 bg-yellow-100 rounded-3xl shadow-[inset_0px_4px_4px_#00000040] textarea-height text-transparent font-jaldi"
+                        className=" p-4 my-6 mx-0 mt-1 h-72 w-full text-sm text-gray-900 bg-yellow-100 rounded-3xl shadow-[inset_0px_4px_4px_#00000040] textarea-height font-jaldi placeholder:text-blue-500 placeholder:text-lg placeholder:font-light" 
                         placeholder="Escribe tu mensaje aquí..."
                     ></textarea>
                 </div>
-                <div className="m-0">
+                <div className="flex flex-row gap-2">
                     <Button type="submit" text="Aceptar" isPrimary={true} />
                     <Button text="Cancelar" isPrimary={false} />
                 </div>
