@@ -75,7 +75,7 @@ const Form = () => {
           placeholder="Escribe tu contraseña ..."
           required
           onChange={handleChange}
-          className={inputStyle}
+          className={inputStyle} 
         />
         <div className={buttonsWrapper}>
           <Button type="submit" text="Aceptar" isPrimary={true} />
