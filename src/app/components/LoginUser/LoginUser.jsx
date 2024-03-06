@@ -1,30 +1,38 @@
 "use client"
-import React, { useState } from 'react';
-import axios from 'axios';
-import styles from './style.module.css';
+import React, { useState } from 'react'
+import axios from '../../../../services/axios';
+import styles from './style.module.css'
 import { useRouter } from 'next/navigation'
-import Input from "../Input/Input.jsx";
-import Button from "../Button/Button.jsx";
-
+import Input from "../Input/Input.jsx"
+import Button from "../Button/Button.jsx"
 
 const LoginUser = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  
+  const [errorMessage, setErrorMessage] = useState('')
+  const [loading, setLoading] = useState(false)
+  const router = useRouter()
 
   const handleSubmit = (e) => {
     e.preventDefault()
+    setLoading(true)
 
     axios.post('/api/login', {
       email,
       password,
     })
     .then((response) => {
-      console.log(response)
+      if (response.status === 200) {
+       
+        router.push('/')
+      }
     })
     .catch((error) => {
-      console.log(error)
-      setErrorMessage('Login failed. Please check your email and password.')
+      if (error.response && error.response.status === 401) {
+        setErrorMessage('Email or password is incorrect')
+      } else {
+        setErrorMessage('An error occurred. Please try again later.')
+      }
     })
     .finally(() => {
       setLoading(false)
@@ -32,36 +40,110 @@ const LoginUser = () => {
   }
 
   return (
-<section className=" h-screen w-full flex justify-center items-center">
-  <div className="border-8 rounded-3xl border-bg-color px-8 py-4">
-    <h3 className='text-red-500 font-semibold text-xl text-center mb-4'>Acceso de usuario</h3>
-    <form className='flex flex-col gap-1' onSubmit={handleSubmit}>
-      <label className='text-blue-850 font-semibold text-xl mb-1'>E-Mail</label>
-      <Input
-        type="email"
-        placeholder="Email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        validationMessage="Debes escrir un e-mail"
-        
-      />
+    <section className="h-screen w-full flex justify-center items-center">
+      <div className="border-8 rounded-3xl border-bg-color px-8 py-4">
+        <h3 className='text-red-500 font-semibold text-xl text-center mb-4'>User Access</h3>
+        <hr/>
+        <form className='flex flex-col gap-1' onSubmit={handleSubmit}>
+          <label className='text-blue-850 font-semibold text-xl mb-1'>Email</label>
+          <Input
+            type="email"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            validationMessage="Please enter a valid email"
+            isRequired
+          />
 
-      <label className='text-blue-850 font-semibold text-xl mb-1'>Contraseña</label>
-      <Input
-        type="password"
-        placeholder="Password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      <div className='flex flex-row place-content-evenly items-center mb-4'>
-        <Button type="submit" text="Aceptar"/>
-        <Button className={styles.buttonSecondary} text="Cancelar" onClick={() => router.push('../../layout.js')} />
+          <label className='text-blue-850 font-semibold text-xl mb-1'>Password</label>
+          <Input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            validationMessage="Please enter a valid password"
+            isRequired
+          />
+          {errorMessage && <p className='text-red-500'>{errorMessage}</p>}
+          <div className='flex flex-row place-content-evenly items-center mb-4'>
+            <Button type="submit" text="Accept" isLoading={loading} />
+            <Button className={styles.buttonSecondary} text="Cancel" onClick={() => router.push('../../layout.js')} />
+          </div>
+        </form>
       </div>
-    </form>
-  </div>
-</section>
+    </section>
   )
 }
 
 export default LoginUser
+
+
+
+
+// "use client"
+// import React, { useState } from 'react';
+// import axios from 'axios';
+// import styles from './style.module.css';
+// import { useRouter } from 'next/navigation'
+// import Input from "../Input/Input.jsx";
+// import Button from "../Button/Button.jsx";
+
+
+// const LoginUser = () => {
+//   const [email, setEmail] = useState('')
+//   const [password, setPassword] = useState('')
+  
+
+//   const handleSubmit = (e) => {
+//     e.preventDefault()
+
+//     axios.post('/api/login', {
+//       email,
+//       password,
+//     })
+//     .then((response) => {
+//       console.log(response)
+//     })
+//     .catch((error) => {
+//       console.log(error)
+//       setErrorMessage('Login failed. Please check your email and password.')
+//     })
+//     .finally(() => {
+//       setLoading(false)
+//     })
+//   }
+
+//   return (
+// <section className=" h-screen w-full flex justify-center items-center">
+//   <div className="border-8 rounded-3xl border-bg-color px-8 py-4">
+//     <h3 className='text-red-500 font-semibold text-xl text-center mb-4'>Acceso de usuario</h3>
+//     <form className='flex flex-col gap-1' onSubmit={handleSubmit}>
+//       <label className='text-blue-850 font-semibold text-xl mb-1'>E-Mail</label>
+//       <Input
+//         type="email"
+//         placeholder="Email"
+//         value={email}
+//         onChange={(e) => setEmail(e.target.value)}
+//         validationMessage="Debes escrir un e-mail"
+        
+//       />
+
+//       <label className='text-blue-850 font-semibold text-xl mb-1'>Contraseña</label>
+//       <Input
+//         type="password"
+//         placeholder="Password"
+//         value={password}
+//         onChange={(e) => setPassword(e.target.value)}
+//       />
+//       <div className='flex flex-row place-content-evenly items-center mb-4'>
+//         <Button type="submit" text="Aceptar"/>
+//         <Button className={styles.buttonSecondary} text="Cancelar" onClick={() => router.push('../../layout.js')} />
+//       </div>
+//     </form>
+//   </div>
+// </section>
+//   )
+// }
+
+// export default LoginUser
 

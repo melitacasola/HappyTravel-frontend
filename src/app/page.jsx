@@ -1,4 +1,5 @@
 import Destinations from "./components/DestinationCard/Destinations";
+import LoginUser from "./components/LoginUser/LoginUser";
 
 
 
@@ -11,6 +12,7 @@ export default function Home() {
       <div>
         <h1>Destinos</h1>
         <Destinations />
+        <LoginUser />
       </div>
     </main>
   );
