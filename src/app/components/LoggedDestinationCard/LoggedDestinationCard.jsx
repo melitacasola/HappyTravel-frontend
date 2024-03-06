@@ -38,5 +38,3 @@ const LoggedDestinationCard = ({ imageUrl, title, country }) => {
   };
   
   export default LoggedDestinationCard;
-
-

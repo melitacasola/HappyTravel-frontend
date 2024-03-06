@@ -8,11 +8,11 @@ const jaldi = Jaldi({
     weight: ["700", "400"],
 });
 
-const NewDestinationForm = () => {
+const NewDestinationForm = ({title}) => {
     return (
         <div className="w-full sm:w-72 sm:h-9/11 lg:w-96 lg:h-9/11 xl:w-full xl:h-9/11 bg-white border-4 rounded-3xl border-yellow-100 p-5">
             <h1 className="text-2xl text-center text-pink-500 font-jaldi">
-                Crear Destino
+                {title}
             </h1>
             <div className="flex flex-row items-center justify-center bg-white h-full rounded-b-xl pr-1 border-t-2 border-pink-500">
                 <div className="bg-white h-full w-1/2 pt-4">

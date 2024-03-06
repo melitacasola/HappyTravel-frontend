@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import styles from './style.module.css';
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/navigation'
 import Input from "../Input/Input.jsx";
 import Button from "../Button/Button.jsx";
 
