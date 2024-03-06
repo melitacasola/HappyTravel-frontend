@@ -2,24 +2,36 @@ import React from 'react';
 import Logo from '../Logo/Logo';
 import SearchComponent from '../SearchComponent/SearchComponent';
 import NavBar from '../NavBar/NavBar';
+import NavBarMobile from '../NavBar/NavBarMobile/NavBarMobile';
+import NavBarLoggedMob from '../NavBar/NavBarLoggedMob/NavBarLoggedMob';
 
 const Header = () => {
     return (
-        <header className="flex items-center justify-between   mx-6 mt-4">
-            <img
-                className="absolute w-[1440px] h-[2px] top-[78px] left- bg-blue-600 mt-2"
-                alt="Line"
-                src="Line-4.svg"
-            />
+        <header className=" border-b-2 border-blue-600 flex flex-col sm:flex-row items-center justify-between mx-4 sm:mx-8 mt-4 pb-4 sm:pb-0 gap-6 sm:gap-8">
+
             <div className="flex items-center">
                 <Logo />
             </div>
-            <div className="flex items-center mx-6 gap-5 ">
+            <div className="flex flex-col sm:flex-row items-center gap-6 sm:gap-8">
                 <SearchComponent />
 
-                <NavBar>
+                <div className="hidden sm:flex">
+                    <NavBar>
 
-                </NavBar>
+                    </NavBar>
+                </div>
+
+                <div className="sm:hidden flex items-center gap-6 sm:gap-8">
+                    <NavBarMobile>
+
+                    </NavBarMobile>
+                </div>
+                <div className="sm:hidden flex items-center gap-6 sm:gap-8">
+                    <NavBarLoggedMob >
+
+                    </NavBarLoggedMob >
+                </div>
+
             </div>
         </header>
     );
