@@ -5,6 +5,7 @@ import DestinationCard from '../DestinationCard/DestinationCard';
 import { EditButton, DeleteButton } from '../DestinationCardButtons/DestinationCardButtons';
 import Image from 'next/image';
 
+
 const LoggedDestinationCard = ({ imageUrl, title, country }) => {
     const topChildren = (
       <div className="absolute top-0 right-0 p-2 z-10">
