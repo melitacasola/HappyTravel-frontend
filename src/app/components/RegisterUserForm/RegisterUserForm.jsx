@@ -37,7 +37,7 @@ const Form = () => {
     console.log({ ...register, [e.target.name]: e.target.value })
     try {
       const res = await registerUser(register);
-      replace("/admin/register");
+      replace("/");
     } catch (error) {
       throw new Error("Error in registration");
     }

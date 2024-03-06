@@ -11,6 +11,7 @@ export default function Home() {
       <div>
         <h1>Destinos</h1>
         <Destinations />
+       
       </div>
     </main>
   );

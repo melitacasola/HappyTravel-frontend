@@ -1,6 +1,6 @@
 "use client"
 import React, { useState } from 'react'
-import axios from '../../../../services/axios';
+import axios from 'axios';
 import styles from './style.module.css'
 import { useRouter } from 'next/navigation'
 import Input from "../Input/Input.jsx"
@@ -17,14 +17,19 @@ const LoginUser = () => {
     e.preventDefault()
     setLoading(true)
 
-    axios.post('/api/login', {
+    axios.post('http://localhost:8000/api/login', {
       email,
       password,
     })
     .then((response) => {
       if (response.status === 200) {
-        const accessToken = response.data.accessToken;
-        router.push('/protected-route'); // poner ruta protegida
+        const accessToken = response.access_token;
+       console.log(response, 'response');
+       console.log(response.data, 'response.data');
+       console.log(response.data.access_token, 'response.data.accessToken');
+       
+       
+        router.push('/'); // poner ruta protegida
       } else {
         setErrorMessage('Invalid email or password'); // Replace with API error message
       }

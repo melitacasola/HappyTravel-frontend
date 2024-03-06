@@ -1,6 +1,6 @@
 import RegisterUserForm from "../components/RegisterUserForm/RegisterUserForm.jsx";
 
-export default function NewDestination() {
+export default function PageRegister() {
   return (
     <>
       <RegisterUserForm />
