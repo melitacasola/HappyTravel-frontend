@@ -23,19 +23,11 @@ const LoginUser = () => {
     })
     .then((response) => {
       if (response.status === 200) {
-       
-        router.push('/details/2')
-      }
-    })
-    .catch((error) => {
-      if (error.response && error.response.status === 401) {
-        setErrorMessage('Email or password is incorrect')
+        const accessToken = response.data.accessToken;
+        router.push('/protected-route'); // poner ruta protegida
       } else {
-        setErrorMessage('An error occurred. Please try again later.')
+        setErrorMessage('Invalid email or password'); // Replace with API error message
       }
-    })
-    .finally(() => {
-      setLoading(false)
     })
   }
 
