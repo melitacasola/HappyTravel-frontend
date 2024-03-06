@@ -19,7 +19,7 @@ const Destinations = () => {
 
     return (
         <div>
-            <DestinationCard data={data}/>
+            <DestinationCard data={data.data}/>
         </div>
     )
 }

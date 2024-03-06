@@ -1,14 +1,15 @@
 import Image from 'next/image';
+import Link from 'next/link';
 
 
 const DestinationCard = ({data}) => {
   return (
-    <div className="rounded-[20px] max-w-xs mx-auto md:max-w-none md:w-1/4" style={{ backgroundColor: '#FBFDCE' }}>
+    <div className="rounded-[20px] max-w-xs mx-auto md:max-w-none md:w-1/4 bg-bg-color">
       <div className="overflow-hidden mb-6 md:mb-0">
         <ul>
           {
-            data?.map((item) => (
-              <li key={item.attributes.id}>
+            data?.map((item, index) => (
+              <li key={index}>
                 <div className="w-full h-72 relative">
                     
                   {/* <Image
@@ -20,9 +21,10 @@ const DestinationCard = ({data}) => {
                   /> */}
                 </div>
                 <div className="p-4">
-                  <h5 className="text-2xl font-semibold" style={{ color: '#0079FF' }}>{item.attributes.title}</h5>
-                  <p className="text-xl font-normal" style={{ color: '#0079FF' }}>{item.attributes.location}</p>
-                  
+                  <Link href={`/details/${item.id}`}>
+                  <h5 className="text-2xl font-semibold text-text-color" >{item.attributes.title}</h5>
+                  </Link>
+                  <p className="text-xl font-normal text-text-color">{item.attributes.location}</p>
                 </div>
               </li>
             ))
