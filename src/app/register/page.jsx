@@ -3,7 +3,7 @@ import RegisterUserForm from "../components/RegisterUserForm/RegisterUserForm.js
 export default function NewDestination() {
   return (
     <>
-      <RegisterUserForm></RegisterUserForm>
+      <RegisterUserForm />
     </>
   );
 }

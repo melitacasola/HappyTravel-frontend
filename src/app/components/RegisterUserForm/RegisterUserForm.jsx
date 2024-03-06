@@ -1,71 +1,81 @@
 "use client";
 
 import React, { useState } from "react";
-import { useFetchApi } from "../../services/useFetchApi";
-import axios from "../../services/axios";
-
+import { registerUser } from "../../services/axios";
 import Input from "../Input/Input.jsx";
 import Button from "../Button/Button.jsx";
 import Link from "next/link";
 
 const Form = () => {
+  /* CSS styles */
+  const registerWrapper = `border-4 rounded-3xl border-bg-color px-8 py-4 mx-auto my-20 max-w-sm`;
+  const titleRegister = `text-2xl text-center text-secondary border-b border-secondary pb-2 mb-8`;
+  const formWrapper = `flex flex-col gap-1`;
+  const labelStyle = `text-text-color text-xl text-left`;
+  const buttonsWrapper = `flex flex-row place-content-evenly items-center mb-4`;
+  const textStyle = `text-text-color text-xl text-center`;
+  const linkStyle = `text-primary text-xl`;
+  const inputStyle = `placeholder-text-color px-6 py-2 rounded-full text-xl shadow-[inset_0px_4px_4px_#00000040] transition-colors duration-300 bg-bg-color font-normal focus:outline-none focus:ring focus:ring-text-color w-72 text-text-color`;
+  /* END CSS styles */
+
   const [register, setRegister] = useState({
     name: "",
     email: "",
     password: "",
   });
 
-  const { data, loading, error } = useFetchApi("http://localhost:8000/api/register", "POST", register);
-
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setRegister((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
+    setRegister({ ...register, [e.target.name]: e.target.value });
 
-    console.log(register);
   };
 
-  /*  */
-  const registerWrapper = `border-4 rounded-3xl border-bg-color px-8 py-4 mx-auto my-20 max-w-sm`;
-  const titleRegister = `text-2xl text-center text-secondary border-b border-secondary pb-2 mb-8`;
-  const formWrapper = `flex flex-col gap-1 items-center`;
-  const labelStyle = `text-text-color text-xl`;
-  const buttonsWrapper = `flex flex-row place-content-evenly items-center mb-4`;
-  const textStyle = `text-text-color text-xl text-center`;
-  const linkStyle = `text-primary text-xl`;
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    console.log({ ...register, [e.target.name]: e.target.value })
+    try {
+      const res = await registerUser(register);
+      console.log(res);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <section className={registerWrapper}>
       <h3 className={titleRegister}>Registro de usuario</h3>
-      <form className={formWrapper}>
+      <form className={formWrapper} onSubmit={handleSubmit}>
         <label className={labelStyle}>Nombre</label>
-        <Input
-          type="text"
-          name="name"
+        <input
+          type="text" 
+          name="name" 
+          value={register.name} 
+          onChange={handleChange} 
+          required 
           placeholder="Escribe tu nombre ..."
           pattern="[A-Za-z ]+"
           validationMessage="Nombre requerido"
-          required
-          onChange={handleChange}
+          className={inputStyle}
         />
         <label className={labelStyle}>E-mail</label>
-        <Input
+        <input
           type="email"
           name="email"
+          value={register.email}
           placeholder="Escribe tu e-mail ..."
           pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
           required
           onChange={handleChange}
+          className={inputStyle}
         />
         <label className={labelStyle}>Contraseña</label>
-        <Input
+        <input
           type="password"
           name="password"
+          value={register.password}
           placeholder="Escribe tu contraseña ..."
           required
           onChange={handleChange}
+          className={inputStyle}
         />
         <div className={buttonsWrapper}>
           <Button type="submit" text="Aceptar" isPrimary={true} />

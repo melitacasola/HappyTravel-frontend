@@ -11,3 +11,11 @@ export const getDestinations = async () => {
   }
 };
 
+export const registerUser = async (userData) => {
+  try {
+    const response = await axios.post(`${urlAPI}/register`, userData);
+    return response.data;
+  } catch (error) {
+    throw error.response.data;
+  }
+};
