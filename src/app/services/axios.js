@@ -19,3 +19,22 @@ export const registerUser = async (userData) => {
     throw error.response.data;
   }
 };
+
+
+export const createDestination = async (destinationData) => {
+  try {
+      const response = await axios.post(`${BASE_URL}/destinations`, destinationData);
+      return response.data;
+  } catch (error) {
+      throw error.response.data;
+  }
+};
+
+export const updateDestination = async (destinationId, destinationData) => {
+  try {
+      const response = await axios.post(`${BASE_URL}/destinations/${destinationId}`, destinationData);
+      return response.data;
+  } catch (error) {
+      throw error.response.data;
+  }
+};

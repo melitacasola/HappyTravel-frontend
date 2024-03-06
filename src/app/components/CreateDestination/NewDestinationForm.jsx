@@ -1,20 +1,67 @@
 "use client";
-import React, { useState } from "react";
+import { useState } from "react";
 import Button from "@/app/components/Button/Button";
-import { Jaldi } from "next/font/google";
+import { useRouter } from "next/navigation";
 
-const jaldi = Jaldi({
-    subsets: ["latin"],
-    weight: ["700", "400"],
-});
 
-const NewDestinationForm = ({title}) => {
+
+const NewDestinationForm = () => {
+    const route = useRouter()
+    const [formData, setFormData] = useState({
+        title: '',
+        location: '',
+        image: null,
+        description: '',
+    });
+
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
+
+    const handleChange = (e) => {
+        const { name, value, files } = e.target;
+        if (name === "image" && files.length > 0) {
+            const selectedFile = files[0];
+            setFormData({
+                ...formData,
+                [name]: selectedFile,
+            });
+            
+        } else {
+            setFormData({
+                ...formData,
+                [name]: value,
+            });
+        }
+        
+    };
+
+    const handleClickDirection = () => {
+        route.replace('/')
+    }
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        
+        try {
+            setLoading(true); 
+            setError(null); 
+
+            const responseData = await createDestination(formData);
+
+            console.log("Destino creado:", responseData);
+            // console.log("Destino creado:", formData);
+
+            // route.replace('/');
+        } catch (error) {
+            setError(error.message || "Hubo un error al crear el destino");
+        } finally {
+            setLoading(false); 
+        }
+    };
+
     return (
         <div className="w-full sm:w-72 sm:h-9/11 lg:w-96 lg:h-9/11 xl:w-full xl:h-9/11 bg-white border-4 rounded-3xl border-yellow-100 p-5">
-            <h1 className="text-2xl text-center text-pink-500 font-jaldi">
-                {title}
-            </h1>
-            <div className="flex flex-row items-center justify-center bg-white h-full rounded-b-xl pr-1 border-t-2 border-pink-500">
+        
+            <form method="POST" onSubmit={handleSubmit} className="flex flex-row items-center justify-center bg-white h-full rounded-b-xl pr-1 border-t-2 border-pink-500">
                 <div className="bg-white h-full w-1/2 pt-4">
                     <div className="mr-7">
                         <label
@@ -25,6 +72,10 @@ const NewDestinationForm = ({title}) => {
                         </label>
                         <input
                             type="text"
+                            name="title"
+                            value={formData.title} 
+                            onChange={handleChange} 
+                            required
                             id="small-input"
                             className="block w-full p-3 rounded-full bg-yellow-100 text-xs input-height shadow-[inset_0px_4px_4px_#00000040]"
                         />
@@ -37,6 +88,10 @@ const NewDestinationForm = ({title}) => {
                         </label>
                         <input
                             type="text"
+                            name="location"
+                            value={formData.location} 
+                            onChange={handleChange} 
+                            required
                             id="small-input-2"
                             className="block w-full p-3 rounded-full bg-yellow-100 text-xs input-height shadow-[inset_0px_4px_4px_#00000040]"
                         />
@@ -51,8 +106,8 @@ const NewDestinationForm = ({title}) => {
                                 className="absolute top-1/2 left-0 transform translate-y-[-0.2rem] fill-current text-white text-center text-xl bg-blue-600 rounded-l-full pl-2.5 pt-2 h-10 shadow-r-lg"
                                 width="22%"
                                 height="98%"
-                                viewBox="auto"
-                                stroke-width="1.6"
+                                viewBox="0 0 24 24" 
+                                strokeWidth="1.6" 
                                 stroke="#fff"
                                 fill="none"
                                 strokeLinecap="round"
@@ -64,13 +119,18 @@ const NewDestinationForm = ({title}) => {
                             <input
                                 id="input-file"
                                 type="file"
+                                name="image"
+                                
+                                onChange={handleChange} 
+                                required
                                 className="bg-yellow-200 w-full h-10 rounded-full text-transparent p-0 shadow-inner"
                             />
                         </div>
 
                         <div className="flex flex-row mt-8 gap-1">
-                            <Button type="submit" text="Aceptar" isPrimary={true} />
-                            <Button text="Cancelar" isPrimary={false} />
+                            {/* <Button type="submit" text="Aceptar" isPrimary={true} /> */}
+                            <button className="text-bg-color bg-primary px-8 py-1 rounded-full cursor-pointer text-xl hover:bg-opacity-80 transition-colors duration-300 flex" >Aceptar</button>
+                            <button className="text-bg-color bg-secondary px-8 py-1 rounded-full cursor-pointer text-xl hover:bg-opacity-80 transition-colors duration-300 flex" onClick={handleClickDirection}>Cancelar</button>
                         </div>
                     </div>
                 </div>
@@ -83,12 +143,16 @@ const NewDestinationForm = ({title}) => {
                     </label>
                     <textarea
                         id="message"
+                        name="description"
+                        value={formData.description} 
+                        onChange={handleChange} 
+                        required
                         rows="3"
-                        className=" p-4 my-6 mt-1 h-80 w-full text-sm text-gray-900 bg-yellow-100 rounded-3xl shadow-[inset_0px_4px_4px_#00000040] textarea-height text-transparent font-jaldi"
+                        className=" p-4 my-6 mt-1 h-80 w-full text-sm text-text-color bg-yellow-100 rounded-3xl shadow-[inset_0px_4px_4px_#00000040] textarea-height font-jaldi"
                         placeholder="Escribe tu mensaje aquí..."
                     ></textarea>
                 </div>
-            </div>
+            </form>
         </div>
     );
 };

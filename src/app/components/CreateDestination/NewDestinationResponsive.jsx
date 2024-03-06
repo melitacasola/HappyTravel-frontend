@@ -1,12 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import Button from "@/app/components/Button/Button";
-import { Jaldi } from "next/font/google";
 
-const jaldi = Jaldi({
-    subsets: ["latin"],
-    weight: ["700", "400"],
-});
 
 const NewDestinationMobile = ({title}) => {
     return (
@@ -51,8 +46,8 @@ const NewDestinationMobile = ({title}) => {
                             className="absolute top-1/2 left-0 transform translate-y-[-0.2rem] fill-current text-white text-center text-xl bg-blue-600 rounded-l-full pl-2.5 pt-2 h-10 shadow-r-lg"
                             width="25%"
                             height="98%"
-                            viewBox="auto"
-                            stroke-width="1.6"
+                            viewBox="0 0 24 24" // Proporciona valores correctos para viewBox
+                            strokeWidth="1.6" 
                             stroke="#fff"
                             fill="none"
                             strokeLinecap="round"
