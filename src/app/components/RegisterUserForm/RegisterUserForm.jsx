@@ -15,6 +15,7 @@ const Form = () => {
   const buttonsWrapper = `flex flex-row place-content-evenly items-center mb-4`;
   const textStyle = `text-text-color text-xl text-center`;
   const linkStyle = `text-primary text-xl`;
+  const inputStyle = `placeholder-text-color px-6 py-2 rounded-full text-xl shadow-[inset_0px_4px_4px_#00000040] transition-colors duration-300 bg-bg-color font-normal focus:outline-none focus:ring focus:ring-text-color w-72 text-text-color`;
   /* END CSS styles */
 
   const [register, setRegister] = useState({
@@ -25,24 +26,18 @@ const Form = () => {
 
   const handleChange = (e) => {
     setRegister({ ...register, [e.target.name]: e.target.value });
-    //const { name, value } = e.target;
-    // setRegister({ ...register, [name]: value });
-    /*  otro experimento
-    setRegister((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));*/
-    console.log({ [e.target.name]: e.target.value });
+
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    /* try {
+    console.log({ ...register, [e.target.name]: e.target.value })
+    try {
       const res = await registerUser(register);
       console.log(res);
     } catch (error) {
       console.log(error);
-    }*/
+    }
   };
 
   return (
@@ -50,18 +45,19 @@ const Form = () => {
       <h3 className={titleRegister}>Registro de usuario</h3>
       <form className={formWrapper} onSubmit={handleSubmit}>
         <label className={labelStyle}>Nombre</label>
-        <Input
-          type="text"
-          name="name"
-          value={register.name}
+        <input
+          type="text" 
+          name="name" 
+          value={register.name} 
+          onChange={handleChange} 
+          required 
           placeholder="Escribe tu nombre ..."
           pattern="[A-Za-z ]+"
           validationMessage="Nombre requerido"
-          required
-          onChange={handleChange}
+          className={inputStyle}
         />
         <label className={labelStyle}>E-mail</label>
-        <Input
+        <input
           type="email"
           name="email"
           value={register.email}
@@ -69,15 +65,17 @@ const Form = () => {
           pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
           required
           onChange={handleChange}
+          className={inputStyle}
         />
         <label className={labelStyle}>Contraseña</label>
-        <Input
+        <input
           type="password"
           name="password"
           value={register.password}
           placeholder="Escribe tu contraseña ..."
           required
           onChange={handleChange}
+          className={inputStyle}
         />
         <div className={buttonsWrapper}>
           <Button type="submit" text="Aceptar" isPrimary={true} />
