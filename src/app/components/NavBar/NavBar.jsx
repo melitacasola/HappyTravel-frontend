@@ -1,25 +1,28 @@
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 const NavBar = () => {
     return (
         <nav>
             <ul className="flex items-center space-x-4">
                 <li>
-                    <Link href="/home">
-                        <img
-                            src='./Assets/Home-icon.svg'
+                    <Link href="/">
+                        <Image
+                            src='/Assets/Home-icon.svg'
                             alt="Home icon"
-                            className="Home-icon w-40px] h-[40px]"
+                            width={40} height={40} 
+                            className="Home-icon"
                         />
                     </Link>
                 </li>
                 <li>
-                    <Link href="/src/app/components/login-user/Login_User.jsx">
-                        <img
-                            src='./Assets/Avatar-icon.svg'
+                    <Link href="#">
+                        <Image
+                            src='/Assets/Avatar-icon.svg'
                             alt="Avatar icon"
-                            className="Avatar-icon w-[40px] h-[40px]"
+                            width={40} height={40} 
+                            className="Avatar-icon"
                         />
 
 
