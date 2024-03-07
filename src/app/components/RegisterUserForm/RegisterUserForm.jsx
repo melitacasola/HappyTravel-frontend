@@ -26,26 +26,7 @@ const Form = () => {
     password: "",
   });
 
-  const router = useRouter()
-  // const handleChange = (e) => {
-  //   setRegister({ ...register, [e.target.name]: e.target.value });
-
-  // };
-
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-    
-  //   try {
-  //     const res = await registerUser(register);
-
-  //     // 
-  //     console.log(res.data.remember_token);
-  //     router.push("/admin/dashboard");
-
-  //   } catch (error) {
-  //     console.error("Error in registration");
-  //   }
-  // };
+  const router = useRouter() 
 
   const handleChange = (e) => {
     setRegister({ ...register, [e.target.name]: e.target.value });
