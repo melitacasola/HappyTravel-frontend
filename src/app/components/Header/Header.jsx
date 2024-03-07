@@ -1,6 +1,6 @@
 import React from 'react';
 import Logo from '../Logo/Logo';
-//import SearchComponent from '../SearchComponent/SearchComponent';
+import SearchComponent from '../SearchComponent/SearchComponent';
 import NavBar from '../NavBar/NavBar';
 import NavBarMobile from '../NavBar/NavBarMobile/NavBarMobile';
 import NavBarLoggedMob from '../NavBar/NavBarLoggedMob/NavBarLoggedMob';
@@ -14,7 +14,7 @@ const Header = () => {
             </div>
             <div className="flex flex-col sm:flex-row items-center gap-6 sm:gap-8">
             
-
+            <SearchComponent/>
                 <div className="hidden sm:flex">
                     <NavBar />
 

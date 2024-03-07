@@ -7,8 +7,8 @@ const DestinationCard = ({data}) => {
     <div className="rounded-[20px] max-w-xs mx-auto md:max-w-none md:w-1/4 bg-bg-color">
       <div className="overflow-hidden mb-6 md:mb-0">
         <ul>
-          {
-            data?.map((item, index) => (
+          
+            {Array.isArray(data) && data.map((item, index) => (
               <li key={index}>
                 <div className="w-full h-72 relative">
                     

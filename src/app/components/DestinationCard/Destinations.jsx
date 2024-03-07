@@ -9,7 +9,8 @@ const Destinations = ({query}) => {
   const [data, setDestinations] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const dataFilter= filterData(data, query)
+
+  
 
   useEffect(() => {
     const fetchData = async () => {
@@ -26,6 +27,11 @@ const Destinations = ({query}) => {
     fetchData();
   }, []);
 
+  const filteredData = filterData(data, query)
+  console.log(filteredData, 'filterData');
+  console.log(data.data, 'data.data');
+  console.log(data, 'data');
+
   if (loading) {
     return <div>Cargando...</div>;
   }
@@ -37,9 +43,11 @@ const Destinations = ({query}) => {
   return (
     <div> 
       {
-        dataFilter.length >0 ? (<DestinationCard data={dataFilter} />) : (<DestinationCard data={data.data} />)
+        filteredData.length > 0 ?
+        (<DestinationCard data={filteredData} />) :
+        (<DestinationCard data={data.data} />)
       }
-     {/*<DestinationCard data={data.data} />*/}
+      
     </div>
   );
 };
