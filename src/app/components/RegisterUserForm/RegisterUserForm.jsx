@@ -5,7 +5,7 @@ import { registerUser } from "../../services/axios";
 import Input from "../Input/Input.jsx";
 import Button from "../Button/Button.jsx";
 import Link from "next/link";
-import { redirect } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { setSessionCookie } from "../../utils/sessionsUtils";
 
 const Form = () => {
@@ -26,6 +26,27 @@ const Form = () => {
     password: "",
   });
 
+  const router = useRouter()
+  // const handleChange = (e) => {
+  //   setRegister({ ...register, [e.target.name]: e.target.value });
+
+  // };
+
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+    
+  //   try {
+  //     const res = await registerUser(register);
+
+  //     // 
+  //     console.log(res.data.remember_token);
+  //     router.push("/admin/dashboard");
+
+  //   } catch (error) {
+  //     console.error("Error in registration");
+  //   }
+  // };
+
   const handleChange = (e) => {
     setRegister({ ...register, [e.target.name]: e.target.value });
 
@@ -36,15 +57,13 @@ const Form = () => {
     
     try {
       const res = await registerUser(register);
-
       setSessionCookie(res.remember_token);
-      redirect("/admin/dashboard");
-
+      console.log(res.remember_token);
+      router.push( "/admin/dashboard" );
     } catch (error) {
-      console.error("Error in registration");
+      console.log(error);
     }
   };
-
   return (
     <section className={registerWrapper}>
       <h3 className={titleRegister}>Registro de usuario</h3>
