@@ -66,7 +66,7 @@ const NewDestinationForm = () => {
                     <div className="mr-7">
                         <label
                             htmlFor="small-input"
-                            className="block mb-2 text-xl text-blue-500 dark:text-white font-semibold font-jaldi mt-2"
+                            className="block mb-2 text-xl text-blue-500 dark:text-white font-semibold font-jaldi"
                         >
                             Título
                         </label>
@@ -77,7 +77,9 @@ const NewDestinationForm = () => {
                             onChange={handleChange} 
                             required
                             id="small-input"
-                            className="block w-full p-3 rounded-full bg-yellow-100 text-xs input-height shadow-[inset_0px_4px_4px_#00000040]"
+                            className="block w-full p-1.5 rounded-full bg-yellow-100 text-xs input-height shadow-[inset_0px_4px_4px_#00000040] placeholder:text-blue-500 placeholder:text-lg placeholder:font-light"
+                            placeholder="Escribe tu nombre..."
+                            style={{ paddingTop: '15px',paddingLeft:'20px' }}
                         />
 
                         <label
@@ -93,17 +95,19 @@ const NewDestinationForm = () => {
                             onChange={handleChange} 
                             required
                             id="small-input-2"
-                            className="block w-full p-3 rounded-full bg-yellow-100 text-xs input-height shadow-[inset_0px_4px_4px_#00000040]"
+                            className="block w-full p-1.5 rounded-full bg-yellow-100 text-xs input-height shadow-[inset_0px_4px_4px_#00000040] placeholder:text-blue-500 placeholder:text-lg placeholder:font-light"
+                            placeholder="Escribe tu nombre..."
+                            style={{ paddingTop: '15px',paddingLeft:'20px' }}
                         />
                         <label
                             htmlFor="small-input-2"
                             className="block pt-3 text-xl font-semibold text-blue-500 dark:text-white font-jaldi">
                             Imagen
                         </label>
-                        <div className="relative inline-block h-auto w-full">
+                        <div className="relative inline-block h-auto w-full ">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
-                                className="absolute top-1/2 left-0 transform translate-y-[-0.2rem] fill-current text-white text-center text-xl bg-blue-600 rounded-l-full pl-2.5 pt-2 h-10 shadow-r-lg"
+                                className="absolute top-1/2 left-0 transform translate-y-[-1.3rem] fill-current text-white text-center text-xl bg-blue-600 rounded-l-full pl-2.5 pt-2 h-10 shadow-r-lg"
                                 width="22%"
                                 height="98%"
                                 viewBox="0 0 24 24" 
@@ -117,7 +121,7 @@ const NewDestinationForm = () => {
                                 <path transform="scale(1.3) translate(5, -2)" d="M5 4h4l3 3h7a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-11a2 2 0 0 1 2 -2" />
                             </svg>
                             <input
-                                id="input-file"
+                                id=""
                                 type="file"
                                 name="image"
                                 
