@@ -19,7 +19,13 @@ const DestinationDetails = () => {
   }
   return (
     <div className="m-32 flex flex-row">
-      <Image src='/Assets/images/IMG_7546.jpg' width="500" height="500" alt={data.attributes.title} className="rounded-xl" />
+      <Image
+        src={`http://localhost:8000/${data.attributes.img}`}
+        width="500"
+        height="500"
+        alt={data.attributes.title}
+        className="rounded-xl"
+      />
 
       <div className="flex flex-col pl-6">
         <h1 className="text-5xl text-secondary">{data.attributes.title}</h1>
