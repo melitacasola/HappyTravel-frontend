@@ -1,14 +1,13 @@
 "use client"
 
 import React, { useState } from 'react'
-import axios from 'axios';
 import styles from './style.module.css'
 import { useRouter } from 'next/navigation'
 import Input from "../Input/Input.jsx"
 import Button from "../Button/Button.jsx"
 import { setSessionCookie } from '../../utils/sessionsUtils';
+import { loginUser } from '../../services/axios';
 
-// import { useAuthContext } from "../../../contexts/authContext";
 
 const LoginUser = () => {
   const [email, setEmail] = useState('')
@@ -17,34 +16,29 @@ const LoginUser = () => {
   const [loading, setLoading] = useState(false)
   const router = useRouter()
 
-  // const { login } = useAuthContext();
-
-  const handleSubmit = (e) => { 
+  const handleSubmit = async(e) => { 
     e.preventDefault()
     setLoading(true)
 
-    axios.post('http://localhost:8000/api/login', {
-      email,
-      password,
-    })
-    .then((response) => {
-      if (response.status === 200) {
+    try {
+      const response = await loginUser({ email, password });
 
+      if (response.status === 200) {
         setSessionCookie(response.data.data.access_token);
-        // login(setSessionCookie)
-        router.push('/admin/dashboard');// poner ruta protegida
+        
+        router.push('/admin/dashboard');
 
       } else {
-        setErrorMessage('Invalid email or password'); // Replace with API error message
+        setErrorMessage('Invalid email or password'); 
       }
-    })
-    .catch((error) => {
+    }
+    catch(error){
       console.error('Login failed:', error);
       setErrorMessage('Failed to log in. Please try again later.');
-    })
-    .finally(() => {
+    }
+    finally{
       setLoading(false);
-    });
+    };
   }
 
   return (

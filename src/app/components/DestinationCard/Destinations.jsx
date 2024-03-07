@@ -1,14 +1,9 @@
 "use client";
 import { useState, useEffect } from "react";
-import { useFetchApi } from "../../services/useFetchApi";
 import DestinationCard from "./DestinationCard";
 import { getDestinations } from "../../services/axios";
 
 const Destinations = () => {
-  /*
-    const urlApi = 'http://localhost:8000/api/destinations'
-
-    const { data, loading, error } = useFetchApi(urlApi); */
 
   const [data, setDestinations] = useState([]);
   const [loading, setLoading] = useState(true);
