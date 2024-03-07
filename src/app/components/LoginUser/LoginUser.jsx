@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import styles from "./style.module.css";
+
 import { useRouter } from "next/navigation";
 import Input from "../Input/Input.jsx";
 import Button from "../Button/Button.jsx";

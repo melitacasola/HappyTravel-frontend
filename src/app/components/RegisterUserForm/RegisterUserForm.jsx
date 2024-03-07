@@ -38,9 +38,15 @@ const Form = () => {
     
     try {
       const res = await registerUser(register);
-      setSessionCookie(res.remember_token);
-      console.log(res.remember_token);
-      router.push( "/admin/dashboard" );
+      if (res.status === 200) {
+        setSessionCookie(res.remember_token);
+        console.log(res);
+
+        router.push("/admin/dashboard");
+      } else {
+        console.log("Invalid email or password");
+      }
+      
     } catch (error) {
       console.log(error);
     }
@@ -89,7 +95,7 @@ const Form = () => {
       </form>
       <p className={textStyle}>
         ¿Ya tienes cuenta? Accede{" "}
-        <Link href="#" className={linkStyle}>
+        <Link href="/login" className={linkStyle}>
           aquí
         </Link>
       </p>
