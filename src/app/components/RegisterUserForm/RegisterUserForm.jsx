@@ -89,7 +89,7 @@ const Form = () => {
       </form>
       <p className={textStyle}>
         ¿Ya tienes cuenta? Accede{" "}
-        <Link href="#" className={linkStyle}>
+        <Link href="/login" className={linkStyle}>
           aquí
         </Link>
       </p>

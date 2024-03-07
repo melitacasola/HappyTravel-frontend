@@ -40,7 +40,7 @@ const LoginUser = () => {
   return (
     <section className="h-screen w-full flex justify-center items-center">
       <div className="border-8 rounded-3xl border-bg-color px-8 py-4">
-        <h3 className="text-red-500 font-semibold text-xl text-center mb-4">User Access</h3>
+        <h3 className="text-red-500 font-semibold text-3xl text-center mb-4">User Access</h3>
         <hr />
         <form className="flex flex-col gap-1" onSubmit={handleSubmit}>
           <label className="text-blue-850 font-semibold text-xl mb-1">Email</label>
