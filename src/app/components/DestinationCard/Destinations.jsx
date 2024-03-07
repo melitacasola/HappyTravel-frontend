@@ -28,9 +28,6 @@ const Destinations = ({query}) => {
   }, []);
 
   const filteredData = filterData(data, query)
-  console.log(filteredData, 'filterData');
-  console.log(data.data, 'data.data');
-  console.log(data, 'data');
 
   if (loading) {
     return <div>Cargando...</div>;

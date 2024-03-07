@@ -1,34 +1,21 @@
 "use client";
 
 import Image from "next/image";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 
 
 
 const SearchComponent = () => {
     const [search, setSearch] = useState("");
-    const searchParams = useSearchParams();
-    const pathName = usePathname();
-    const {replace} = useRouter()
 
-        const handleChange = (term) => {
-        const params = new URLSearchParams(searchParams);
-        if(term) {
-            params.set("query", term)
     
-        } else {
-            params.delete("query")
-        }
-       // setSearch(e.target.value); 
-        replace(`${pathName}?${params.toString()}`);
-    };
 
     const router = useRouter()
 
     const handleSearch = (e) => {
-        e.preventDefault(); // Evitar que el formulario se envíe
-        router.push(`/?query=${search}`); // Navegar con el parámetro de búsqueda
+        e.preventDefault(); 
+        router.push(`/?query=${search}`); 
         setSearch('')
     }
 

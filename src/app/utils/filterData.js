@@ -1,5 +1,3 @@
-// filterData.js
-
 export const filterData = (data, searchParam) => {
     let filteredData;
   
@@ -14,7 +12,6 @@ export const filterData = (data, searchParam) => {
       filteredData = data;
     }
   
-    console.log(filteredData, 'en filterDta') ;
     return filteredData;
   };
   
