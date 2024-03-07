@@ -31,8 +31,10 @@ const LoginUser = () => {
       if (response.status === 200) {
 
         setSessionCookie(response.data.data.access_token);
-        // login(setSessionCookie)
+        
         router.push('/admin/dashboard');// poner ruta protegida
+        router.refresh()
+        
 
       } else {
         setErrorMessage('Invalid email or password'); // Replace with API error message
