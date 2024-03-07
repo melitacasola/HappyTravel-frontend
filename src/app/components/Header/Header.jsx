@@ -16,20 +16,16 @@ const Header = () => {
                 <SearchComponent />
 
                 <div className="hidden sm:flex">
-                    <NavBar>
+                    <NavBar />
 
-                    </NavBar>
                 </div>
 
                 <div className="sm:hidden flex items-center gap-6 sm:gap-8">
-                    <NavBarMobile>
-
-                    </NavBarMobile>
+                    <NavBarMobile/>
+                    
                 </div>
                 <div className="sm:hidden flex items-center gap-6 sm:gap-8">
-                    <NavBarLoggedMob >
-
-                    </NavBarLoggedMob >
+                    <NavBarLoggedMob />
                 </div>
 
             </div>

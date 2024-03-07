@@ -5,7 +5,8 @@ import { registerUser } from "../../services/axios";
 import Input from "../Input/Input.jsx";
 import Button from "../Button/Button.jsx";
 import Link from "next/link";
-import { useRouter } from 'next/navigation';
+import { redirect } from 'next/navigation';
+import { setSessionCookie } from "../../utils/sessionsUtils";
 
 const Form = () => {
   /* CSS styles */
@@ -18,8 +19,6 @@ const Form = () => {
   const linkStyle = `text-primary text-xl`;
   const inputStyle = `placeholder-text-color px-6 py-2 rounded-full text-xl shadow-[inset_0px_4px_4px_#00000040] transition-colors duration-300 bg-bg-color font-normal focus:outline-none focus:ring focus:ring-text-color w-72 text-text-color`;
   /* END CSS styles */
-
-  const {replace} = useRouter()
   
   const [register, setRegister] = useState({
     name: "",
@@ -34,12 +33,15 @@ const Form = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log({ ...register, [e.target.name]: e.target.value })
+    
     try {
       const res = await registerUser(register);
-      replace("/");
+
+      setSessionCookie(res.remember_token);
+      redirect("/admin/dashboard");
+
     } catch (error) {
-      throw new Error("Error in registration");
+      console.error("Error in registration");
     }
   };
 

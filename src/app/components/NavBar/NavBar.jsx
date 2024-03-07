@@ -17,7 +17,7 @@ const NavBar = () => {
                     </Link>
                 </li>
                 <li>
-                    <Link href="#">
+                    <Link href="/login">
                         <Image
                             src='/Assets/Avatar-icon.svg'
                             alt="Avatar icon"

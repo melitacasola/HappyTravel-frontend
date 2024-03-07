@@ -21,7 +21,7 @@ const NavBarLoggedMob = () => {
                         </Link>
                     </li>
                     <li>
-                        <Link href="/create">
+                        <Link href="/login">
                             <img
                                 src='./Assets/Create-icon.svg'
                                 alt="Create icon"
