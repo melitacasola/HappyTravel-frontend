@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { registerUser } from "../../services/axios";
 import Button from "../Button/Button.jsx";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter } from 'next/navigation';
 import { setSessionCookie } from "../../utils/sessionsUtils";
 
 const Form = () => {
@@ -28,6 +28,7 @@ const Form = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const router = useRouter();
 
+
   const handleChange = (e) => {
     setRegister({ ...register, [e.target.name]: e.target.value });
   };
@@ -37,14 +38,10 @@ const Form = () => {
 
     try {
       const res = await registerUser(register);
-      
-      if (res.status === 200) {
+
       setSessionCookie(res.remember_token);
-      
       router.push("/admin/dashboard");
-      } else {
-        alert("Invalid credentials!");
-      }
+
     } catch (error) {
       setErrorMessage("Failed to log in. Please try again later.");
     }
@@ -62,7 +59,7 @@ const Form = () => {
           required
           placeholder="Escribe tu nombre ..."
           pattern="[A-Za-z ]+"
-          validationMessage="Nombre requerido"
+          // validationMessage="Nombre requerido"
           className={inputStyle}
         />
         <label className={labelStyle}>E-mail</label>

@@ -23,7 +23,6 @@ const DestinationDetails = () => {
     return <div>No hay datos disponibles.</div>;
   }
 
-  // Concatenar la URL base con la URL relativa de la imagen
   const imageUrl = `http://localhost:8000${data.attributes.image}`;
   
   return (

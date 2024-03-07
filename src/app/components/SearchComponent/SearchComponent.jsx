@@ -9,8 +9,6 @@ import React, { useState } from "react";
 const SearchComponent = () => {
     const [search, setSearch] = useState("");
 
-    
-
     const router = useRouter()
 
     const handleSearch = (e) => {
