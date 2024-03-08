@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 const DestinationCard = ({data}) => {
   return (
-    <div className="rounded-[20px] max-w-xs mx-auto md:max-w-none md:w-1/4 bg-bg-color">
+    <div className="">
       <div className="overflow-hidden mb-6 md:mb-0">
         <ul>
           {
@@ -12,13 +12,15 @@ const DestinationCard = ({data}) => {
               <li key={index}>
                 <div className="w-full h-72 relative">
                     
-                  {/* <Image
-                    src={item.attributes.image}
+                  <Image
+                    src={`http://localhost:8000${item.attributes.image}`}
                     alt={item.attributes.title}
-                    layout="fill"
-                    objectFit="cover"
+                    width={250}
+                    height={250}
+                    // layout="fill"
+                    // objectFit="cover"
                     className="rounded-[20px_20px_0_0]"
-                  /> */}
+                  />
                 </div>
                 <div className="p-4">
                   <Link href={`/details/${item.id}`}>
