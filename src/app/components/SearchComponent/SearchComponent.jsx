@@ -1,36 +1,45 @@
 "use client";
 
+import Image from "next/image";
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 
-const SearchComponent = ({ onSearch, className }) => {
+
+
+const SearchComponent = () => {
     const [search, setSearch] = useState("");
 
-    const handleSearch = () => {
-        onSearch(search);
-    };
+    const router = useRouter()
 
-    const handleChange = (e) => {
-        setSearch(e.target.value);
-    };
+    const handleSearch = (e) => {
+        e.preventDefault(); 
+        router.push(`/?query=${search}`); 
+        setSearch('')
+    }
 
     return (
         <div
-            className={`relative w-[200px] h-[35px] bg-yellow-100 rounded-[20px] shadow-[inset_0px_2px_2px_#00000040] ${className}`}
+            className={`relative w-[200px] h-[35px] bg-yellow-100 rounded-[20px] shadow-[inset_0px_2px_2px_#00000040]`}
         >
-            <input
+            <form onSubmit={handleSearch}>
+
+                <input
                 type="text"
                 placeholder="Search..."
                 value={search}
-                onChange={handleChange}
-                className="absolute top-0 left-0 [font-family:'Jaldi-Regular',Helvetica] font-normal text-[#0079ff] text-[20px]  tracking-[0] leading-[normal] whitespace-nowrap p-2 w-full h-full bg-yellow-100 rounded-[20px] shadow-[inset_0px_2px_2px_#00000040] outline-none  placeholder-blue-500 text-left"
-            />
+                onChange={(e) => setSearch(e.target.value)}
+                className="absolute top-0 left-0 font-normal text-[#0079ff] text-[20px] tracking-[0] leading-normal whitespace-nowrap p-2 w-full h-full bg-yellow-100 rounded-[20px] shadow-[inset_0px_2px_2px_#00000040] outline-none placeholder-blue-500 text-left"
+                />
 
-            <img
-                src="./Assets/Glass-icon.svg"
-                alt="Glass icon"
-                className="Glass-icon absolute w-[23px] h-[18px] top-[30%] transform [-translate-y] right-[16px]"
-                onClick={handleSearch}
-            />
+                <Image
+                    src="/Assets/Glass-icon.svg"
+                    alt="Glass icon"
+                    width={23}
+                    height={18}
+                    className="absolute top-[30%] transform [-translate-y] right-[16px]"
+                
+                />
+            </form>
         </div>
     );
 };
