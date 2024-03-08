@@ -38,6 +38,8 @@ npm run dev
 - CSS
 - Javascript
 - React.js
+- Jest
+
 
 ## 🧪 Running Tests
 
@@ -51,30 +53,24 @@ To run tests, run the following command
 ## Screenshots
 Desktop 💻
 
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+<img src="./public/Assets//imgReadme/1.png" width=900px>
 
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+<img src="./public/Assets//imgReadme/2.png" width=900px>
 
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+<img src="./public/Assets//imgReadme/3.png" width=900px>
 
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+<img src="./public/Assets//imgReadme/4.png" width=900px>
 
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+<img src="./public/Assets//imgReadme/5.png" width=900px>
 
 Mobil 📱
 
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+<img src="./public/Assets//imgReadme/6.png" width=900px>
 
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
-
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
-
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
-
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+FIGMA:   [FIGMA](https://www.figma.com/file/twPJOzEo5hZJZ7srsEt10y/HappyTravel?type=design&node-id=10%3A834&mode=design&t=p3TmznsiCfRll5ue-1)
 
 
-## 🔗 Information about the programmers
+## 🔗 Information about the programmers ✍️
 
 Hemi:      [linkedin ](https://www.linkedin.com/in/hemileidis/) y
 [github ](https://github.com/HemiCastillo)
