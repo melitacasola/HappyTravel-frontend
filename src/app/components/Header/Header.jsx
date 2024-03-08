@@ -13,8 +13,8 @@ const Header = () => {
                 <Logo />
             </div>
             <div className="flex flex-col sm:flex-row items-center gap-6 sm:gap-8">
-                <SearchComponent />
-
+            
+            <SearchComponent/>
                 <div className="hidden sm:flex">
                     <NavBar />
 

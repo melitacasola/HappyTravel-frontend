@@ -15,7 +15,7 @@ export const EditButton = () => (
 export const DeleteButton = () => (
   <div className="cursor-pointer">
     <Image
-      src="/assets/delete-icon.svg"
+      src="/Assets/Delete-icon.svg"
       alt="Eliminar"
       width={24}
       height={24}
