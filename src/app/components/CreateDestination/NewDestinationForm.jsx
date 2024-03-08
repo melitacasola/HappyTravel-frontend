@@ -47,10 +47,6 @@ const NewDestinationForm = () => {
 
             const responseData = await createDestination(formData);
 
-            console.log("Destino creado:", responseData);
-            // console.log("Destino creado:", formData);
-
-            // route.replace('/');
         } catch (error) {
             setError(error.message || "Hubo un error al crear el destino");
         } finally {

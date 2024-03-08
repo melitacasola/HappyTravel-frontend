@@ -13,7 +13,7 @@ const DestinationCard = ({ data }) => {
   /* END CSS styles */
   return (
     <ul className={gridWrapper}>
-      {data?.map((item, index) => (
+      {Array.isArray(data) && data.map((item, index) => (
         <li key={index} className={gridItem}>
           <div className={imgWrapper}>
             <Link href={`/details/${item.id}`}>
