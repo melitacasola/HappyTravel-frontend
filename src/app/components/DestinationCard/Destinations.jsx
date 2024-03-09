@@ -4,13 +4,10 @@ import DestinationCard from "./DestinationCard";
 import { getDestinations } from "../../services/axios";
 import { filterData } from "@/app/utils/filterData";
 
-const Destinations = ({query}) => {
-
+const Destinations = ({ query }) => {
   const [data, setDestinations] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
-  
 
   useEffect(() => {
     const fetchData = async () => {
@@ -27,7 +24,7 @@ const Destinations = ({query}) => {
     fetchData();
   }, []);
 
-  const filteredData = filterData(data, query)
+  const filteredData = filterData(data, query);
 
   if (loading) {
     return <div>Cargando...</div>;
@@ -38,13 +35,8 @@ const Destinations = ({query}) => {
   }
 
   return (
-    <div> 
-      {
-        filteredData.length > 0 ?
-        (<DestinationCard data={filteredData} />) :
-        (<DestinationCard data={data.data} />)
-      }
-      
+    <div>
+      {filteredData.length > 0 ? <DestinationCard data={filteredData} /> : <DestinationCard data={data.data} />}
     </div>
   );
 };
