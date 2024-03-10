@@ -11,6 +11,15 @@ export const getDestinations = async () => {
   }
 };
 
+export const getPagination = async () => {
+  try {
+    const response = await axios.get(`${urlAPI}/destinations?page=${page}`);
+    return response.data;
+  } catch (error) {
+    throw error.response.data;
+  }
+};
+
 export const registerUser = async (userData) => {
   try {
     const response = await axios.post(`${urlAPI}/register`, userData);
@@ -19,7 +28,6 @@ export const registerUser = async (userData) => {
     throw error.response.data;
   }
 };
-
 
 export const loginUser = async (userData) => {
   try {
@@ -30,21 +38,20 @@ export const loginUser = async (userData) => {
   }
 };
 
-
 export const createDestination = async (destinationData) => {
   try {
-      const response = await axios.post(`${BASE_URL}/destinations`, destinationData);
-      return response.data;
+    const response = await axios.post(`${BASE_URL}/destinations`, destinationData);
+    return response.data;
   } catch (error) {
-      throw error.response.data;
+    throw error.response.data;
   }
 };
 
 export const updateDestination = async (destinationId, destinationData) => {
   try {
-      const response = await axios.post(`${BASE_URL}/destinations/${destinationId}`, destinationData);
-      return response.data;
+    const response = await axios.post(`${BASE_URL}/destinations/${destinationId}`, destinationData);
+    return response.data;
   } catch (error) {
-      throw error.response.data;
+    throw error.response.data;
   }
 };
