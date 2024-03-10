@@ -2,16 +2,16 @@ import React from "react";
 import NextButton from "../NextButton/NextButton";
 import PreviousButton from "../PreviousButton/PreviousButton";
 
-const PaginationButtons = ({ currentPage, totalPages, onPageChange }) => {
+const PaginationButtons = ({ currentPage, totalPages, updatePage }) => {
   const handlePrevPage = () => {
     if (currentPage > 1) {
-      onPageChange(currentPage - 1);
+      updatePage(currentPage - 1);
     }
   };
 
   const handleNextPage = () => {
     if (currentPage < totalPages) {
-      onPageChange(currentPage + 1);
+      updatePage(currentPage + 1);
     }
   };
 

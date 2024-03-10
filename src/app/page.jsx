@@ -2,7 +2,8 @@
 import React, { useState, useEffect } from "react";
 import Destinations from "./components/DestinationCard/Destinations";
 import PaginationButtons from "./components/PaginationButtons/PaginationButtons";
-import { getPagination } from "./services/axios";
+//import { getPagination } from "./services/axios";
+import { getDestinations } from "./services/axios";
 
 export default function Home({ searchParams }) {
   const query = searchParams?.query;
@@ -13,24 +14,24 @@ export default function Home({ searchParams }) {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await getPagination(currentPage);
+        //const response = await getPagination(currentPage);
+        const response = await getDestinations();
         if (response && response.data) {
           setTotalPages(response.last_page);
           setDestinations(response.data);
-          console.log("Data from API:", response.data);
+          console.log("Data from API:", response);
         } else {
-          console.error("Response or response data is undefined:", response);
+          console.error("Error in response:", response);
         }
       } catch (error) {
         console.error("Error fetching data:", error);
       }
     };
-
     fetchData();
   }, [currentPage]);
 
-  const handlePageChange = (page) => {
-    console.log("Changing to page:", page);
+  const handlePageUpdate = (page) => {
+    console.log("Page:", page);
     setCurrentPage(page);
   };
 
@@ -39,7 +40,7 @@ export default function Home({ searchParams }) {
       <div>
         <Destinations destinations={destinations} query={query} />
         <div className="hidden md:block">
-          <PaginationButtons currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} />
+          <PaginationButtons currentPage={currentPage} totalPages={totalPages} updatePage={handlePageUpdate} />
         </div>
       </div>
     </main>
