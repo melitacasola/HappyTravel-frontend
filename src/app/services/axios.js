@@ -11,9 +11,10 @@ export const getDestinations = async () => {
   }
 };
 
-export const getPagination = async () => {
+export const getPagination = async (page) => {
   try {
     const response = await axios.get(`${urlAPI}/destinations?page=${page}`);
+    console.log(page, response.data, "axios");
     return response.data;
   } catch (error) {
     throw error.response.data;

@@ -2,8 +2,8 @@
 import React, { useState, useEffect } from "react";
 import Destinations from "./components/DestinationCard/Destinations";
 import PaginationButtons from "./components/PaginationButtons/PaginationButtons";
-//import { getPagination } from "./services/axios";
-import { getDestinations } from "./services/axios";
+import { getPagination } from "./services/axios";
+//import { getDestinations } from "./services/axios";
 
 export default function Home({ searchParams }) {
   const query = searchParams?.query;
@@ -12,14 +12,15 @@ export default function Home({ searchParams }) {
   const [destinations, setDestinations] = useState([]);
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchData = async (currentPage) => {
       try {
-        //const response = await getPagination(currentPage);
-        const response = await getDestinations();
-        if (response && response.data) {
-          setTotalPages(response.last_page);
+        console.log("Estoy pasando página:", currentPage);
+        const response = await getPagination(currentPage);
+        //const response = await getDestinations();
+        if (response.data) {
+          console.log("Estoy pasando la última página:", response.data.last_page);
           setDestinations(response.data);
-          console.log("Data from API:", response);
+          setTotalPages(response.last_page);
         } else {
           console.error("Error in response:", response);
         }
@@ -27,7 +28,7 @@ export default function Home({ searchParams }) {
         console.error("Error fetching data:", error);
       }
     };
-    fetchData();
+    fetchData(currentPage);
   }, [currentPage]);
 
   const handlePageUpdate = (page) => {

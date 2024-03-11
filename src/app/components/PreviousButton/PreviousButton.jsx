@@ -1,6 +1,6 @@
 import React from "react";
 
-const PreviousButton = () => {
+const PreviousButton = ({ onClick, disabled }) => {
   return (
     <div className="w-[60px] h-[40px] bg-text-color rounded-[20px] flex items-center justify-center">
       <button className="flex items-center">
