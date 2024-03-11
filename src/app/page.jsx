@@ -2,28 +2,23 @@
 import React, { useState, useEffect } from "react";
 import Destinations from "./components/DestinationCard/Destinations";
 import PaginationButtons from "./components/PaginationButtons/PaginationButtons";
-import { getPagination } from "./services/axios";
-//import { getDestinations } from "./services/axios";
+import { getDestinations } from "./services/axios";
 
 export default function Home({ searchParams }) {
   const query = searchParams?.query;
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [destinations, setDestinations] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    const fetchData = async (currentPage) => {
+    const fetchData = async (page) => {
       try {
-        console.log("Estoy en la página:", currentPage);
-        const response = await getPagination(currentPage);
-        //const response = await getDestinations();
-        if (response.data) {
-          console.log("Estoy pasando la última página:", response.meta.last_page);
-          setDestinations(response.data);
-          setTotalPages(response.meta.last_page);
-        } else {
-          console.error("Error in response:", response);
-        }
+        setLoading(true);
+        const response = await getDestinations(page);
+        setDestinations(response.data);
+        setTotalPages(response.meta.last_page);
+        setLoading(false);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -31,18 +26,27 @@ export default function Home({ searchParams }) {
     fetchData(currentPage);
   }, [currentPage]);
 
-  const handlePageUpdate = (page) => {
-    console.log("¿Qué página es esta? -->", page);
+  const handlePageUpdate = async (page) => {
     setCurrentPage(page);
+
+    const response = await getDestinations(currentPage);
+    setDestinations(response.data);
   };
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between py-14">
       <div>
-        <Destinations destinations={destinations} query={query} />
-        <div className="hidden md:block">
-          <PaginationButtons currentPage={currentPage} totalPages={totalPages} updatePage={handlePageUpdate} />
-        </div>
+        {loading ? (
+          <p>Cargando...</p>
+        ) : (
+          <>
+            <Destinations destinations={destinations} query={query} />
+
+            <div className="hidden md:block">
+              <PaginationButtons currentPage={currentPage} totalPages={totalPages} updatePage={handlePageUpdate} />
+            </div>
+          </>
+        )}
       </div>
     </main>
   );
