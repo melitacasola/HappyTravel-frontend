@@ -32,7 +32,7 @@ export default function Home({ searchParams }) {
   }, [currentPage]);
 
   const handlePageUpdate = (page) => {
-    console.log("Page:", page);
+    console.log("¿Qué página es esta? -->", page);
     setCurrentPage(page);
   };
 
