@@ -4,11 +4,11 @@ import { filterData } from "@/app/utils/filterData";
 
 const Destinations = ({ destinations, query }) => {
 
-  const filteredData = filterData(destinations, query);
+  const filteredData = destinations ? filterData(destinations, query) : [];
 
   return (
     <div>
-      {filteredData.length > 0 ? <DestinationCard data={filteredData} /> : <DestinationCard data={destinations.data} />}
+      {filteredData.length > 0 ? <DestinationCard data={filteredData} /> : <div>No hay destinos disponibles.</div>}
     </div>
   );
 };
