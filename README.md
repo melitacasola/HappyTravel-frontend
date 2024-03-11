@@ -1,36 +1,93 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+# Project Title Happy Travel 🛫
 
-First, run the development server:
+
+
+
+
+## OBJECTIVE OF THE PROJECT
+🚅 Speaking of Vacations, who doesn't like to travel and see new places? The company HappyTravel has hired them to develop a web application, so that people can tell the destinations they would love to visit and why. The objective is that unauthenticated users can look at all the dream destinations of other users and in turn an authenticated user can create, edit and delete their own travel dreams.
+
+
+## 📌 Requirements
+
+Visual Studio Code
+
+Node.js installed on the computer
+## ⚙️ Installation
+
+This repository is the Frontend where the visual part of the website is, to install it on the computer you must follow these steps:
+
+1- Clone the repository
+
+2- Put in the terminal within the project
+
+npm install
+
+3- To open and see the website in the terminal you have to enter
+
+npm run dev
+
+🚨 This Frontend repository can be used with any Backend, here we leave you the link to the repository of our Backend in case you want to use it with this Frontend 🚨
+
+🔗 [Backend link ](https://github.com/HappyTravel-project/HappyTravel-backend) 🔗
+
+
+## 🛠️ Tools
+- HTML: 5,
+- CSS: 3,
+- Javascript: "^3.0.5",
+- React.js: "^18",
+- Jest: "^29.7.0",
+- Next: "14.1.0",
+- PHP: 8.2.12,
+- Axios: "^1.6.7",
+
+## 🧪 Running Tests
+
+To run tests, run the following command
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+  npm run test
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## Screenshots
+Desktop 💻
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+<img src="./public/Assets//imgReadme/1.png" width=900px>
 
-## Learn More
+<img src="./public/Assets//imgReadme/2.png" width=900px>
 
-To learn more about Next.js, take a look at the following resources:
+<img src="./public/Assets//imgReadme/3.png" width=900px>
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+<img src="./public/Assets//imgReadme/4.png" width=900px>
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+<img src="./public/Assets//imgReadme/5.png" width=900px>
 
-## Deploy on Vercel
+Mobil 📱
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+<img src="./public/Assets//imgReadme/6.png" width=900px>
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+FIGMA:   [FIGMA](https://www.figma.com/file/twPJOzEo5hZJZ7srsEt10y/HappyTravel?type=design&node-id=10%3A834&mode=design&t=p3TmznsiCfRll5ue-1)
+
+
+## 🔗 Information about the programmers ✍️
+
+Hemi:      [linkedin ](https://www.linkedin.com/in/hemileidis/) y
+[github ](https://github.com/HemiCastillo)
+
+Fefy:      [linkedin ](https://www.linkedin.com/in/stefania-desogus/) y
+[github ](https://github.com/stef-ania)
+
+Steph:      [linkedin ](https://www.linkedin.com/in/stephanie-cespedes/) y
+[github ](https://github.com/tephyxp)
+
+Melissa:      [linkedin ](https://www.linkedin.com/in/melissa-casola/) y
+[github ](https://github.com/melitacasola)
+
+Carolina:      [linkedin ](https://www.linkedin.com/in/tcarolina/) y
+[github ](https://github.com/Thazet)
+
+Grecia:      [linkedin ](https://www.linkedin.com/in/grecialh/) y
+[github ](https://github.com/GreciaLH)
