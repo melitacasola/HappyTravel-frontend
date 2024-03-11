@@ -14,13 +14,13 @@ export default function Home({ searchParams }) {
   useEffect(() => {
     const fetchData = async (currentPage) => {
       try {
-        console.log("Estoy pasando página:", currentPage);
+        console.log("Estoy en la página:", currentPage);
         const response = await getPagination(currentPage);
         //const response = await getDestinations();
         if (response.data) {
-          console.log("Estoy pasando la última página:", response.data.last_page);
+          console.log("Estoy pasando la última página:", response.meta.last_page);
           setDestinations(response.data);
-          setTotalPages(response.last_page);
+          setTotalPages(response.meta.last_page);
         } else {
           console.error("Error in response:", response);
         }
