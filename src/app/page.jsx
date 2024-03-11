@@ -2,44 +2,40 @@
 import React, { useState, useEffect } from "react";
 import Destinations from "./components/DestinationCard/Destinations";
 import PaginationButtons from "./components/PaginationButtons/PaginationButtons";
-import { getPagination } from "./services/axios";
-//import { getDestinations } from "./services/axios";
+import { getDestinations } from "./services/axios";
 
-export default function Home({ searchParams }) {
+export default function Home({searchParams}) {
   const query = searchParams?.query;
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [destinations, setDestinations] = useState([]);
 
   useEffect(() => {
-    const fetchData = async (currentPage) => {
+    const fetchData = async (page) => {
       try {
-        console.log("Estoy pasando página:", currentPage);
-        const response = await getPagination(currentPage);
-        //const response = await getDestinations();
-        if (response.data) {
-          console.log("Estoy pasando la última página:", response.data.last_page);
-          setDestinations(response.data);
-          setTotalPages(response.last_page);
-        } else {
-          console.error("Error in response:", response);
-        }
+        const response = await getDestinations(page);
+        setDestinations(response.data);
+        setTotalPages(response.meta.last_page);
+        
       } catch (error) {
         console.error("Error fetching data:", error);
       }
     };
-    fetchData(currentPage);
+    fetchData(currentPage); 
   }, [currentPage]);
 
-  const handlePageUpdate = (page) => {
-    console.log("Page:", page);
+  const handlePageUpdate = async (page) => {
     setCurrentPage(page);
+    
+    const response = await getDestinations(currentPage);
+    setDestinations(response.data);
   };
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between py-14">
       <div>
-        <Destinations destinations={destinations} query={query} />
+        <Destinations destinations={destinations} query={query}/>
+
         <div className="hidden md:block">
           <PaginationButtons currentPage={currentPage} totalPages={totalPages} updatePage={handlePageUpdate} />
         </div>
