@@ -16,6 +16,10 @@ const SearchComponent = () => {
         router.push(`/?query=${search}`); 
         setSearch('')
     }
+    const handleChange = (e) => {
+        setSearch(e.target.value);
+        router.push(`/?query=${e.target.value}`);
+    };
 
     return (
         <div
@@ -27,7 +31,7 @@ const SearchComponent = () => {
                 type="text"
                 placeholder="Search..."
                 value={search}
-                onChange={(e) => setSearch(e.target.value)}
+                onChange={handleChange}
                 className="absolute top-0 left-0 font-normal text-[#0079ff] text-[20px] tracking-[0] leading-normal whitespace-nowrap p-2 w-full h-full bg-yellow-100 rounded-[20px] shadow-[inset_0px_2px_2px_#00000040] outline-none placeholder-blue-500 text-left"
                 />
 

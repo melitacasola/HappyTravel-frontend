@@ -10,7 +10,7 @@ const AlertModal = ({ isOpen, onClose, text }) => {
 
       {/* Dark background */}
       <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-60">
-        <div className="bg-bg-color rounded-[20px] pt-12 pb-4 px-6 md:px-16 mx-8 max-w-md rounded-3xl">
+        <div className="bg-bg-color pt-12 pb-4 px-6 md:px-16 mx-8 max-w-md rounded-3xl">
           <p className="text-2xl mb-8 text-center font-normal">{text}</p>
           <div className={buttonsWrapper}>
             <Button type="submit" text="Aceptar" isPrimary={true} onClick={onClose} />
