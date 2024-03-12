@@ -49,6 +49,16 @@ export const updateDestination = async (destinationId, destinationData) => {
   }
 };
 
+export const checkUserSession = async () => {
+  try {
+    const response = await axios.get(`${urlAPI}/check-session`, { withCredentials: true });
+    return response.data.isLoggedIn;
+  } catch (error) {
+    console.error("Error checking user session:", error);
+    return false;
+  }
+};
+
 // delete destination 
 
 export const deleteDestination = async (destinationId) => {
