@@ -56,7 +56,7 @@ const NewDestinationMobile = ({title}) => {
                             strokeLinejoin="round"
                         >
                             <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                            <path transform="scale(1.3) translate(5, -2)" d="M5 4h4l3 3h7a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-11a2 2 0 0 1 2 -2" />
+                            <path transform="scale(1.2) translate(-2, -5)" d="M5 4h4l3 3h7a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-11a2 2 0 0 1 2 -2" />
                         </svg>
                         <input
                             id="input-file"

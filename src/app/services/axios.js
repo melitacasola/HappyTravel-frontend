@@ -48,3 +48,17 @@ export const updateDestination = async (destinationId, destinationData) => {
     throw error.response.data;
   }
 };
+<<<<<<< HEAD
+=======
+
+// delete destination 
+
+export const deleteDestination = async (destinationId) => {
+  try {
+    const response = await axios.delete(`${urlAPI}/destinations/${destinationId}`);
+    return response.data;
+  } catch (error) {
+    throw error.response.data;
+  }
+};
+>>>>>>> feature-delete-alert
