@@ -34,12 +34,14 @@ npm run dev
 
 
 ## 🛠️ Tools
-- HTML
-- CSS
-- Javascript
-- React.js
-- Jest
-
+- HTML: 5,
+- CSS: 3,
+- Javascript: "^3.0.5",
+- React.js: "^18",
+- Jest: "^29.7.0",
+- Next: "14.1.0",
+- PHP: 8.2.12,
+- Axios: "^1.6.7",
 
 ## 🧪 Running Tests
 
