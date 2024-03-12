@@ -48,8 +48,6 @@ export const updateDestination = async (destinationId, destinationData) => {
     throw error.response.data;
   }
 };
-<<<<<<< HEAD
-=======
 
 // delete destination 
 
@@ -61,4 +59,3 @@ export const deleteDestination = async (destinationId) => {
     throw error.response.data;
   }
 };
->>>>>>> feature-delete-alert
