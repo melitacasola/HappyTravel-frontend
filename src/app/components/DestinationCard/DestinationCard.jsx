@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import {EditButton,DeleteButton} from "../DestinationCardButtons/DestinationCardButtons"
 
-const DestinationCard = ({ data }) => {
+const DestinationCard = ({ data,isAuthenticated }) => {
   /* CSS styles */
   const gridWrapper = `grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-[2rem]`;
   const gridItem = `w-[18.75rem] bg-bg-color rounded-[20px_20px_20px_20px]`;
@@ -36,10 +36,12 @@ const DestinationCard = ({ data }) => {
               </Link>
               <p className={textStyle}>{item.location}</p>
             </div>
+            {isAuthenticated ?  (
             <div className="flex flex-row gap-2 p-3">
                   <EditButton />
                   <DeleteButton />
             </div>
+            ) :null}
             </div>
             
           </li>

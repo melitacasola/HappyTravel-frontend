@@ -32,7 +32,9 @@ export const loginUser = async (userData) => {
 
 export const createDestination = async (destinationData) => {
   try {
-    const response = await axios.post(`${BASE_URL}/destinations`, destinationData);
+    console.log(destinationData);
+    const response = await axios.post(`${urlAPI}/destinations`, destinationData);
+    console.log(response,"response en el axios")
     return response.data;
   } catch (error) {
     throw error.response.data;

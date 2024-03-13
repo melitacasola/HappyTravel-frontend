@@ -3,8 +3,9 @@ import React, { useState, useEffect } from "react";
 import Destinations from "./components/DestinationCard/Destinations";
 import PaginationButtons from "./components/PaginationButtons/PaginationButtons";
 import { getDestinations } from "./services/axios";
+import AlertModal from "./components/AlertModal/AlertModal";
 
-export default function Home({ searchParams }) {
+export default function Home({ searchParams,isAuthenticated }) {
   const query = searchParams?.query;
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
@@ -42,7 +43,8 @@ export default function Home({ searchParams }) {
           <p>Cargando...</p>
         ) : (
           <>
-            <Destinations destinations={destinations} query={query} />
+            <AlertModal />
+            <Destinations destinations={destinations} isAuthenticated={isAuthenticated} query={query} />
 
             <div className="hidden md:block">
               <PaginationButtons currentPage={currentPage} totalPages={totalPages} updatePage={handlePageUpdate} />
