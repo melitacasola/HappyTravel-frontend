@@ -2,18 +2,18 @@
 import { useState } from "react";
 import Button from "@/app/components/Button/Button";
 import { useRouter } from "next/navigation";
+import { createDestination } from "@/app/services/axios";
 
 
 
 const NewDestinationForm = () => {
-    const route = useRouter()
+    const router = useRouter(); // Cambié "route" a "router"
     const [formData, setFormData] = useState({
         title: '',
         location: '',
         image: null,
         description: '',
     });
-
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
@@ -25,34 +25,32 @@ const NewDestinationForm = () => {
                 ...formData,
                 [name]: selectedFile,
             });
-            
         } else {
             setFormData({
                 ...formData,
                 [name]: value,
             });
         }
-        
     };
 
     const handleClickDirection = () => {
-        route.replace('/')
-    }
+        router.replace('/');
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
-        
         try {
-            setLoading(true); 
-            setError(null); 
-
+            setLoading(true);
+            setError(null);
             const responseData = await createDestination(formData);
-
+            // Redirigir después de enviar exitosamente el formulario
+            router.push('/'); // Cambié "route.replace('/')"" a "router.push('/')"
         } catch (error) {
             setError(error.message || "Hubo un error al crear el destino");
-        } finally {
-            setLoading(false); 
+            setLoading(false);
         }
     };
+
 
     return (
         <div className="w-full sm:w-72 sm:h-9/11 lg:w-96 lg:h-9/11 xl:w-full xl:h-9/11 bg-white border-4 rounded-3xl border-yellow-100 p-5">

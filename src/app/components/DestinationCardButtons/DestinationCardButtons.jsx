@@ -6,8 +6,8 @@ export const EditButton = () => (
   <div className="cursor-pointer">
     <Image
       src="/assets/edit-icon.svg"
-      width={24}
-      height={24}
+      width={31}
+      height={31}
     />
   </div>
 );

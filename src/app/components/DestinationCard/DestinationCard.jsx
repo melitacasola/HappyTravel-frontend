@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import {EditButton,DeleteButton} from "../DestinationCardButtons/DestinationCardButtons"
 
 const DestinationCard = ({ data }) => {
   /* CSS styles */
@@ -28,12 +29,19 @@ const DestinationCard = ({ data }) => {
                 className={imgStyle}
               />
             </div>
-            <div className="p-4">
+            <div className="flex flex-row p-4 justify-between">
+              <div >
               <Link href={`/details/${item.id}`}>
                 <h5 className={titleStyle}>{item.title}</h5>
               </Link>
               <p className={textStyle}>{item.location}</p>
             </div>
+            <div className="flex flex-row gap-2 p-3">
+                  <EditButton />
+                  <DeleteButton />
+            </div>
+            </div>
+            
           </li>
         ))}
     </ul>
