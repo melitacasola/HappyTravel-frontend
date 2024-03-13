@@ -21,8 +21,8 @@ const DestinationCard = ({ data }) => {
                 <Image src="/Assets/Info-icon.svg" alt="Info" className={infoIconStyle} width="50" height="50" />
               </Link>
               <Image
-                src={`http://localhost:8000${item.attributes.image}`}
-                alt={item.attributes.title}
+                src={`http://localhost:8000${item.image}`}
+                alt={item.title}
                 width="300"
                 height="300"
                 className={imgStyle}
@@ -30,9 +30,9 @@ const DestinationCard = ({ data }) => {
             </div>
             <div className="p-4">
               <Link href={`/details/${item.id}`}>
-                <h5 className={titleStyle}>{item.attributes.title}</h5>
+                <h5 className={titleStyle}>{item.title}</h5>
               </Link>
-              <p className={textStyle}>{item.attributes.location}</p>
+              <p className={textStyle}>{item.location}</p>
             </div>
           </li>
         ))}

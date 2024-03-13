@@ -17,7 +17,7 @@ const PaginationButtons = ({ currentPage, totalPages, updatePage }) => {
     <div className="all components w-full p-4">
       <div className="flex items-center justify-center w-full h-[40px] gap-6">
         <a
-          className={`flex items-center w-[60px] h-[40px] bg-text-color rounded-[20px] flex items-center justify-center cursor-pointer ${
+          className={`flex items-center w-[60px] h-[40px] bg-text-color rounded-[20px] justify-center cursor-pointer ${
             currentPage === 1 ? "pointer-events-none" : ""
           }`}
           onClick={handlePrevPage}

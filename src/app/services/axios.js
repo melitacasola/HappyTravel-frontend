@@ -6,7 +6,7 @@ export const getDestinations = async (page) => {
   try {
     const response = await axios.get(`${urlAPI}/destinations?page=${page}`);
 
-    return response.data;
+    return response.data.data;
   } catch (error) {
     throw error.response.data;
   }

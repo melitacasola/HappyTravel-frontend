@@ -17,8 +17,8 @@ export default function Home({ searchParams }) {
         setLoading(true);
         const response = await getDestinations(page);
 
-        setDestinations(response.data.data);
-        setTotalPages(response.data.last_page);
+        setDestinations(response.data);
+        setTotalPages(response.last_page);
         setLoading(false);
         window.scrollTo({ top: 0, behavior: "smooth" });
       } catch (error) {
