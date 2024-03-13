@@ -2,12 +2,11 @@ import axios from "axios";
 
 const urlAPI = "http://localhost:8000/api";
 
-
 export const getDestinations = async (page) => {
   try {
     const response = await axios.get(`${urlAPI}/destinations?page=${page}`);
 
-    return response.data;
+    return response.data.data;
   } catch (error) {
     throw error.response.data;
   }
@@ -49,7 +48,7 @@ export const updateDestination = async (destinationId, destinationData) => {
   }
 };
 
-// delete destination 
+// delete destination
 
 export const deleteDestination = async (destinationId) => {
   try {

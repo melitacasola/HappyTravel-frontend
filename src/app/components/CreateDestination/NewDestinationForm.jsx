@@ -129,7 +129,7 @@ const NewDestinationForm = () => {
 
                         <div className="flex flex-row mt-8 gap-1">
                             {/* <Button type="submit" text="Aceptar" isPrimary={true} /> */}
-                            <button className="text-bg-color bg-primary px-8 py-1 rounded-full cursor-pointer text-xl hover:bg-opacity-80 transition-colors duration-300 flex" >Aceptar</button>
+                            <button type="submit" className="text-bg-color bg-primary px-8 py-1 rounded-full cursor-pointer text-xl hover:bg-opacity-80 transition-colors duration-300 flex" >Aceptar</button>
                             <button className="text-bg-color bg-secondary px-8 py-1 rounded-full cursor-pointer text-xl hover:bg-opacity-80 transition-colors duration-300 flex" onClick={handleClickDirection}>Cancelar</button>
                         </div>
                     </div>
