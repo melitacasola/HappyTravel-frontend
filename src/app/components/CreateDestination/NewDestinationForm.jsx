@@ -27,11 +27,13 @@ const NewDestinationForm = () => {
 
     const handleSubmit = async (e) => {
       e.preventDefault();
-      console.log(formData)
+      
       try {
         console.log("entrando al try")
+        
         const responseData = await createDestination(formData);
-       console.log(responseData)
+       console.log(responseData, 'responseData')
+       
       } catch (error) {
         setErrorMessage("Hubo un error al crear el destino. Por favor, inténtalo de nuevo más tarde.");
       }

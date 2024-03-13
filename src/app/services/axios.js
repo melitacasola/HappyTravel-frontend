@@ -1,10 +1,16 @@
 import axios from "axios";
+import { getSessionData } from "../utils/sessionsUtils";
 
 const urlAPI = "http://localhost:8000/api";
 
+const api = axios.create({
+  baseURL: urlAPI,
+  withCredentials: true, // Habilitar el envío de cookies en las solicitudes
+});
+
 export const getDestinations = async (page) => {
   try {
-    const response = await axios.get(`${urlAPI}/destinations?page=${page}`);
+    const response = await api.get(`/destinations?page=${page}`);
 
     return response.data.data;
   } catch (error) {
@@ -14,7 +20,7 @@ export const getDestinations = async (page) => {
 
 export const registerUser = async (userData) => {
   try {
-    const response = await axios.post(`${urlAPI}/register`, userData);
+    const response = await api.post(`/register`, userData);
     return response.data;
   } catch (error) {
     throw error.response.data;
@@ -23,7 +29,7 @@ export const registerUser = async (userData) => {
 
 export const loginUser = async (userData) => {
   try {
-    const response = await axios.post(`${urlAPI}/login`, userData);
+    const response = await api.post(`/login`, userData);
     return response.data;
   } catch (error) {
     throw error.response.data;
@@ -32,9 +38,18 @@ export const loginUser = async (userData) => {
 
 export const createDestination = async (destinationData) => {
   try {
-    console.log(destinationData);
-    const response = await axios.post(`${urlAPI}/destinations`, destinationData);
-    console.log(response,"response en el axios")
+    const authToken = await getSessionData(); // Obteniendo directamente el token de acceso
+    console.log(authToken, 'auth token');
+    
+    if (!authToken) {
+      throw new Error("Token de autenticación no encontrado en la sesión.");
+    }
+    const response = await api.post(`/destinations`, destinationData, {
+      headers: {
+        Authorization: `Bearer ${authToken}`
+      }
+    });
+    console.log(response.data, 'response.data');
     return response.data;
   } catch (error) {
     throw error.response.data;
@@ -43,7 +58,7 @@ export const createDestination = async (destinationData) => {
 
 export const updateDestination = async (destinationId, destinationData) => {
   try {
-    const response = await axios.post(`${BASE_URL}/destinations/${destinationId}`, destinationData);
+    const response = await api.post(`/destinations/${destinationId}`, destinationData);
     return response.data;
   } catch (error) {
     throw error.response.data;
@@ -54,7 +69,7 @@ export const updateDestination = async (destinationId, destinationData) => {
 
 export const deleteDestination = async (destinationId) => {
   try {
-    const response = await axios.delete(`${urlAPI}/destinations/${destinationId}`);
+    const response = await api.delete(`/destinations/${destinationId}`);
     return response.data;
   } catch (error) {
     throw error.response.data;

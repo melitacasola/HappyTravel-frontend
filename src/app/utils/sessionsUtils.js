@@ -2,17 +2,19 @@
 import { cookies } from 'next/headers';
 
 const encrypt = (data) => {
-    const encryptedData = btoa(data); // Codificar en Base64
+    const encryptedData = btoa(data);
     return encryptedData;
 };
 
 const decrypt = (encryptedData) => {
-    const decryptedData = atob(encryptedData); // Decodificar desde Base64
+    const decryptedData = atob(encryptedData);
     return decryptedData;
 };
 
 export const setSessionCookie = (sessionData) => {
-    const encryptedSessionData = encrypt(JSON.stringify(sessionData)); 
+    const encryptedSessionData = JSON.stringify(sessionData); 
+    console.log(sessionData, 'sesion data');
+    
     cookies().set('authTokens', encryptedSessionData, {
         httpOnly: true,
         secure: process.env.NODE_ENV === 'production',
@@ -24,8 +26,8 @@ export const setSessionCookie = (sessionData) => {
 
 export async function getSessionData(req) {
     const encryptedSessionData = cookies(req).get('authTokens')?.value;
-    console.log(encryptedSessionData);
-    return encryptedSessionData ? JSON.parse(decrypt(encryptedSessionData)) : null;
+    console.log(encryptedSessionData, 'get');
+    return encryptedSessionData ? JSON.parse(encryptedSessionData) : null;
 }
 
 export const logout = (req) => {
