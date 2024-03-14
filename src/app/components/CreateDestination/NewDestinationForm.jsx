@@ -3,11 +3,11 @@ import { useState } from "react";
 import Button from "@/app/components/Button/Button";
 import { useRouter } from "next/navigation";
 import { createDestination } from "../../services/axios";
+import { getSessionData } from '../../utils/sessionsUtils';
 
 
 
 const NewDestinationForm = () => {
-
 
     const [formData, setFormData] = useState({
         title: "",
@@ -30,10 +30,21 @@ const NewDestinationForm = () => {
       console.log(formData)
       try {
         console.log("entrando al try")
-        const responseData = await createDestination(formData);
-       console.log(responseData)
+        const sessionData = await getSessionData();
+        if (sessionData) {
+            const token = sessionData.token;
+            console.log(token)
+        const responseData = await createDestination(formData,token);
+       console.log("Destino creado con éxito",responseData)
+        } else{
+            setErrorMessage("Necesitas iniciar sesión para crear un destino.");
+        }
       } catch (error) {
-        setErrorMessage("Hubo un error al crear el destino. Por favor, inténtalo de nuevo más tarde.");
+        if (error.response.status === 401) {
+            setErrorMessage("Error de autenticación. Inicia sesión nuevamente.");
+          } else {
+            setErrorMessage("Hubo un error al crear el destino. Por favor, inténtalo de nuevo más tarde.");
+          }
       }
     };
 

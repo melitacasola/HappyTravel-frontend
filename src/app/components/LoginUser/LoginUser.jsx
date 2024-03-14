@@ -7,6 +7,7 @@ import { useRouter } from 'next/navigation'
 import Input from "../Input/Input.jsx"
 import Button from "../Button/Button.jsx"
 import { setSessionCookie } from '../../utils/sessionsUtils';
+import { loginUser } from '@/app/services/axios';
 
 const LoginUser = () => {
   const [email, setEmail] = useState('')
@@ -21,29 +22,34 @@ const LoginUser = () => {
     e.preventDefault()
     setLoading(true)
 
-    axios.post('http://localhost:8000/api/login', {
-      email,
-      password,
-    })
-    .then((response) => {
-      if (response.status === 200) {
+    // axios.post('http://localhost:8000/api/login', {
+    //   email,
+    //   password,
+    // })
+    axios.get('/sanctum/csrf-cookie').then(response => {
+      const data = {email, password};
+      loginUser(data).then((response) => {
 
-        setSessionCookie(response.data.data.access_token);
-        
-        router.push('/admin/dashboard');
-        router.refresh()
+  
+          setSessionCookie(response.data.access_token);
+          
+          router.push('/admin/dashboard');
+          router.refresh()
+  
 
-      } else {
-        setErrorMessage('Invalid email or password'); 
-      }
-    })
-    .catch((error) => {
-      console.error('Login failed:', error);
-      setErrorMessage('Failed to log in. Please try again later.');
-    })
-    .finally(() => {
-      setLoading(false);
+        console.log(response.data.access_token)
+      })
+      
+      .catch((error) => {
+        console.error('Login failed:', error);
+        setErrorMessage('Failed to log in. Please try again later.');
+      })
+      .finally(() => {
+        setLoading(false);
+      });
     });
+
+    
   }
 
   return (
