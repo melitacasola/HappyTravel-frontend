@@ -62,3 +62,4 @@ export const deleteDestination = async (destinationId) => {
     throw error.response.data;
   }
 };
+
