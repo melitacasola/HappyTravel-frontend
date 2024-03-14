@@ -37,7 +37,7 @@ export default function Home({ searchParams,isAuthenticated }) {
     const response = await getDestinations(currentPage);
     setDestinations(response.data);
   };
-
+  
   const handleDeleteButtonClick = (destination) => {
     setDestinationToDelete(destination);
     setShowAlertModal(true); 
@@ -50,6 +50,7 @@ export default function Home({ searchParams,isAuthenticated }) {
     // Lógica adicional para eliminar el destino del estado o de la base de datos
   };
 
+
   return (
     <main className="flex min-h-screen flex-col items-center justify-between py-14">
       <div>
@@ -57,11 +58,10 @@ export default function Home({ searchParams,isAuthenticated }) {
           <p>Cargando...</p>
         ) : (
           <>
-            {/* <AlertModal
-              text={`¿Estás seguro de que deseas eliminar este destino?`}
-              
-            /> */}
-            <Destinations destinations={destinations} isAuthenticated={isAuthenticated} query={query} />
+            {showAlertModal && <AlertModal text={`¿Estás seguro de que deseas eliminar este destino?`} onClose={() => setShowAlertModal(false)} />}
+          
+            <Destinations destinations={destinations} isAuthenticated={isAuthenticated} query={query} onDeleteButtonClick={handleDeleteButtonClick} showAlertModal={showAlertModal}
+  setShowAlertModal={setShowAlertModal} />
 
             <div className="hidden md:block">
               <PaginationButtons currentPage={currentPage} totalPages={totalPages} updatePage={handlePageUpdate} />

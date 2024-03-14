@@ -12,8 +12,8 @@ export const EditButton = () => (
   </div>
 );
 
-export const DeleteButton = () => (
-  <div className="cursor-pointer">
+export const DeleteButton = ({ onClick }) => (
+  <div className="cursor-pointer" onClick={onClick} >
     <Image
       src="/Assets/Delete-icon.svg"
       alt="Eliminar"

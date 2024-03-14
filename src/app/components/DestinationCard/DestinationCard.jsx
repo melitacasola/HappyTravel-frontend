@@ -1,8 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
-import {EditButton,DeleteButton} from "../DestinationCardButtons/DestinationCardButtons"
+import { EditButton, DeleteButton } from "../DestinationCardButtons/DestinationCardButtons"
 
-const DestinationCard = ({ data }) => {
+const DestinationCard = ({ data, onDeleteButtonClick }) => {
+  console.log("onDeleteButtonClick:", onDeleteButtonClick)
   /* CSS styles */
   const gridWrapper = `grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-[2rem]`;
   const gridItem = `w-[18.75rem] bg-bg-color rounded-[20px_20px_20px_20px]`;
@@ -12,7 +13,7 @@ const DestinationCard = ({ data }) => {
   const titleStyle = `text-2xl font-semibold text-text-color`;
   const textStyle = `text-xl font-normal text-text-color`;
   /* END CSS styles */
-  
+
   
 
   return (
@@ -34,17 +35,21 @@ const DestinationCard = ({ data }) => {
             </div>
             <div className="flex flex-row p-4 justify-between">
               <div >
-              <Link href={`/details/${item.id}`}>
-                <h5 className={titleStyle}>{item.title}</h5>
-              </Link>
-              <p className={textStyle}>{item.location}</p>
+                <Link href={`/details/${item.id}`}>
+                  <h5 className={titleStyle}>{item.title}</h5>
+                </Link>
+                <p className={textStyle}>{item.location}</p>
+              </div>
+              <div className="flex flex-row gap-2 p-3">
+                <EditButton />
+                <DeleteButton onClick={() => {
+                  onDeleteButtonClick(item);
+                  // Set showAlertModal to true here
+                  props.setShowAlertModal(true);
+                }} />
+              </div>
             </div>
-            <div className="flex flex-row gap-2 p-3">
-                  <EditButton />
-                  <DeleteButton />
-            </div>
-            </div>
-            
+
           </li>
         ))}
     </ul>
