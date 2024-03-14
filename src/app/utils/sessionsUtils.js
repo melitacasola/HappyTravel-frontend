@@ -22,11 +22,21 @@ export const setSessionCookie = (sessionData) => {
 
 };
 
-export async function getSessionData(req) {
-    const encryptedSessionData = cookies(req).get('authTokens')?.value;
-    console.log(encryptedSessionData);
-    return encryptedSessionData ? JSON.parse(decrypt(encryptedSessionData)) : null;
-}
+// export async function getSessionData(req) {
+//     const encryptedSessionData = cookies(req).get('authTokens')?.value;
+//     console.log(encryptedSessionData);
+//     return encryptedSessionData ? JSON.parse(decrypt(encryptedSessionData)) : null;
+// }
+
+export const getSessionData = () => {
+    const encryptedSessionData = cookies().get('authTokens');
+    if (encryptedSessionData) {
+      const sessionData = JSON.parse(decrypt(encryptedSessionData));
+      return sessionData;
+    }
+    return null;
+  };
+  
 
 export const logout = (req) => {
     cookies(req).delete('authTokens')

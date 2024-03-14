@@ -57,10 +57,10 @@ export default function Home({ searchParams,isAuthenticated }) {
           <p>Cargando...</p>
         ) : (
           <>
-            <AlertModal
+            {/* <AlertModal
               text={`¿Estás seguro de que deseas eliminar este destino?`}
               
-            />
+            /> */}
             <Destinations destinations={destinations} isAuthenticated={isAuthenticated} query={query} />
 
             <div className="hidden md:block">

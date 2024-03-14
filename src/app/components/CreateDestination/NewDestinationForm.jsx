@@ -4,11 +4,17 @@ import Button from "@/app/components/Button/Button";
 import { useRouter } from "next/navigation";
 import { createDestination } from "../../services/axios";
 import { getSessionData } from '../../utils/sessionsUtils';
+import { useAuth } from "../../context/AuthContext";
 
 
 
 const NewDestinationForm = () => {
-
+    const { user, setUser, csrfToken, can, hasRole } = useAuth();
+    const handleLogin = async () => {
+        await csrfToken();
+        // Realiza la lógica de inicio de sesión y actualiza el usuario
+        setUser(newUser);
+      };
     const [formData, setFormData] = useState({
         title: "",
         location: "",
@@ -34,7 +40,12 @@ const NewDestinationForm = () => {
         if (sessionData) {
             const token = sessionData.token;
             console.log(token)
-        const responseData = await createDestination(formData,token);
+            const headers = {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            };
+
+        const responseData = await createDestination(formData,token,{headers});
        console.log("Destino creado con éxito",responseData)
         } else{
             setErrorMessage("Necesitas iniciar sesión para crear un destino.");

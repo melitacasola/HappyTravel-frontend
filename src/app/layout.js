@@ -2,6 +2,7 @@ import { Jaldi } from "next/font/google";
 import "./globals.css";
 import Header from "./components/Header/Header";
 import LoggedDestinationCard from "./components/LoggedDestinationCard/LoggedDestinationCard";
+import { AuthProvider } from "./context/AuthContext";
 
 const jaldi = Jaldi({
   subsets: ["latin"],
@@ -16,6 +17,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
+    <AuthProvider>
     <html lang="es">
       <body
         className={`${jaldi.className}  bg-white text-text-color font-bold text-[4rem] rounded-full border-primary`}
@@ -26,5 +28,6 @@ export default function RootLayout({ children }) {
         {children}
       </body>
     </html>
+    </AuthProvider>
   );
 }
