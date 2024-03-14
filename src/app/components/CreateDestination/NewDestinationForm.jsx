@@ -3,11 +3,23 @@ import { useState } from "react";
 import Button from "@/app/components/Button/Button";
 import { useRouter } from "next/navigation";
 import { createDestination } from "../../services/axios";
+import { getSessionData } from '../../utils/sessionsUtils';
+import { useAuth } from "../../context/AuthContext";
+import { useAuthContext } from '../../../contexts/authContext';
+
+import axios from "axios";
 
 
 
 const NewDestinationForm = () => {
+    // const { user, setUser, csrfToken, can, hasRole } = useAuth();
+    // const handleLogin = async () => {
+    //     await csrfToken();
+    //     // Realiza la lógica de inicio de sesión y actualiza el usuario
+    //     setUser(newUser);
+    // };
 
+    const { getAuthToken } = useAuthContext();
 
     const [formData, setFormData] = useState({
         title: "",
@@ -20,23 +32,26 @@ const NewDestinationForm = () => {
 
 
     const handleChange = (e) => {
-        console.log(formData)
-        setFormData({ ...formData, [e.target.name]: e.target.value });
-        console.log(formData)
+        setFormData({ ...formData, [e.target.name]: e.target.value })
     };
 
-    const handleSubmit = async (e) => {
-      e.preventDefault();
-      
-      try {
-        console.log("entrando al try")
-        
-        const responseData = await createDestination(formData);
-       console.log(responseData, 'responseData')
-       
-      } catch (error) {
-        setErrorMessage("Hubo un error al crear el destino. Por favor, inténtalo de nuevo más tarde.");
-      }
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        const authToken = getAuthToken(); // Obtener el token de autenticación del contexto
+        axios.get('/sanctum/csrf-cookie')
+            .then(async (response) => {
+                try {
+                    const responseData = await createDestination(formData, authToken);
+                    console.log(responseData);
+                } catch (error) {
+                    console.error('Error al crear el destino:', error);
+                    setErrorMessage('Error al crear el destino. Por favor, inténtalo de nuevo más tarde.');
+                }
+            })
+            .catch((error) => {
+                console.error('Error al obtener el token CSRF:', error);
+                setErrorMessage('Error al obtener el token CSRF. Por favor, inténtalo de nuevo más tarde.');
+            });
     };
 
 

@@ -11,6 +11,8 @@ export default function Home({ searchParams,isAuthenticated }) {
   const [totalPages, setTotalPages] = useState(1);
   const [destinations, setDestinations] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [destinationToDelete, setDestinationToDelete] = useState(null);
+  const [showAlertModal, setShowAlertModal] = useState(false);
 
   useEffect(() => {
     const fetchData = async (page) => {
@@ -36,6 +38,18 @@ export default function Home({ searchParams,isAuthenticated }) {
     setDestinations(response.data);
   };
 
+  const handleDeleteButtonClick = (destination) => {
+    setDestinationToDelete(destination);
+    setShowAlertModal(true); 
+  };
+
+  const handleDeleteConfirm = () => {
+    // Aquí puedes implementar la lógica para eliminar el destino
+    console.log("Eliminar destino:", destinationToDelete);
+    setShowAlertModal(false);
+    // Lógica adicional para eliminar el destino del estado o de la base de datos
+  };
+
   return (
     <main className="flex min-h-screen flex-col items-center justify-between py-14">
       <div>
@@ -43,7 +57,10 @@ export default function Home({ searchParams,isAuthenticated }) {
           <p>Cargando...</p>
         ) : (
           <>
-            <AlertModal />
+            {/* <AlertModal
+              text={`¿Estás seguro de que deseas eliminar este destino?`}
+              
+            /> */}
             <Destinations destinations={destinations} isAuthenticated={isAuthenticated} query={query} />
 
             <div className="hidden md:block">
