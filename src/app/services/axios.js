@@ -1,11 +1,10 @@
 import axios from "axios";
 
-
 const urlAPI = "http://localhost:8000/";
 
-axios.defaults.withCredentials=true;
+axios.defaults.withCredentials = true;
 
-axios.defaults.baseURL= urlAPI;
+axios.defaults.baseURL = urlAPI;
 
 // axios.interceptors.request.use(config => {
 //   const token = obtenerTokenDeLocalStorage(); // Obtén el token de localStorage o cookies
@@ -16,7 +15,6 @@ axios.defaults.baseURL= urlAPI;
 // }, error => {
 //   return Promise.reject(error);
 // });
-
 
 export const getDestinations = async (page) => {
   try {
@@ -46,40 +44,44 @@ export const loginUser = async (userData) => {
   }
 };
 
-export const logoutUser = async(token)=>{
-  let config ={
-      headers:{
-        'Authorization' : `Bearer ${token}`,
-      },
+export const logoutUser = async (token) => {
+  let config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
   };
   try {
-    const response = await axios.delete('api/logout', config);
-    
-    return response.data; 
+    const response = await axios.delete("api/logout", config);
+
+    return response.data;
   } catch (error) {
-      
-      console.error('Error al realizar la solicitud de cierre de sesión:', error);
-      throw error; 
+    console.error("Error al realizar la solicitud de cierre de sesión:", error);
+    throw error;
   }
-}
-
-
-
+};
 
 export const createDestination = async (destinationData, authToken) => {
   try {
-  
-    
-    const response = await axios.post('/api/destinations', destinationData, {
+    console.log("destinationData:", destinationData);
+    console.log("authToken:", authToken);
+
+    const response = await axios.post("/api/destinations", destinationData, {
       headers: {
-        'X-XSRF-TOKEN': Cookies.get('XSRF-TOKEN'), // Incluye el token CSRF en el encabezado
-        'Authorization': `Bearer ${authToken}` // Incluye el token de autenticación en el encabezado
-      }
-    })
+        "X-XSRF-TOKEN": Cookies.get("XSRF-TOKEN"), // Incluye el token CSRF en el encabezado
+        Authorization: `Bearer ${authToken}`, // Incluye el token de autenticación en el encabezado
+      },
+    });
 
-    console.log(response,"response del axios")
+    console.log(response, "response del axios");
 
-    return response.data;
+    if (response && response.data) {
+      console.log("response.data:", response.data);
+      return response.data;
+    } else {
+      console.error("La respuesta no contiene datos:", response);
+      throw new Error("La respuesta no contiene datos");
+    }
+    //return response.data;
   } catch (error) {
     throw error.response.data;
   }
@@ -104,4 +106,3 @@ export const deleteDestination = async (destinationId) => {
     throw error.response.data;
   }
 };
-
