@@ -1,11 +1,12 @@
 "use client";
 
-import React, { useState } from "react";
+import { useState } from "react";
+import axios from 'axios';
 import { registerUser } from "../../services/axios";
-import Button from "../Button/Button.jsx";
-import Link from "next/link";
+import { useAuthContext } from '../../../contexts/authContext';
 import { useRouter } from 'next/navigation';
-import { setSessionCookie } from "../../utils/sessionsUtils";
+import Link from "next/link";
+import Button from "../Button/Button.jsx";
 
 const Form = () => {
   /* CSS styles */
@@ -19,34 +20,39 @@ const Form = () => {
   const inputStyle = `placeholder-text-color px-6 py-2 rounded-full text-xl shadow-[inset_0px_4px_4px_#00000040] transition-colors duration-300 bg-bg-color font-normal focus:outline-none focus:ring focus:ring-text-color w-72 text-text-color`;
   /* END CSS styles */
 
-  const [register, setRegister] = useState({
+  const [data, setData] = useState({
     name: "",
     email: "",
     password: "",
   });
 
   const [errorMessage, setErrorMessage] = useState("");
-  const router = useRouter();
 
+  const router = useRouter();
+  const {login} = useAuthContext()
 
   const handleChange = (e) => {
-    setRegister({ ...register, [e.target.name]: e.target.value });
+    setData({ ...data, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    try {
-      const res = await registerUser(register);
-
-      setSessionCookie(res.remember_token);
-      router.push("/admin/dashboard");
-      router.refresh()
-
-    } catch (error) {
-      setErrorMessage("Failed to log in. Please try again later.");
-    }
+    axios.get('/sanctum/csrf-cookie').then(response => {
+      registerUser(data)
+        .then((res) => {
+          login(res.remember_token)
+          router.push("/");
+          router.refresh()
+        })
+        .catch ((error) =>{
+          console.error('Login failed:', error);
+          setErrorMessage("Failed to log in. Please try again later.");
+        })
+    })
+    
   };
+
   return (
     <section className={registerWrapper}>
       <h3 className={titleRegister}>Registro de usuario</h3>
@@ -55,7 +61,7 @@ const Form = () => {
         <input
           type="text"
           name="name"
-          value={register.name}
+          value={data.name}
           onChange={handleChange}
           required
           placeholder="Escribe tu nombre ..."
@@ -67,7 +73,7 @@ const Form = () => {
         <input
           type="email"
           name="email"
-          value={register.email}
+          value={data.email}
           placeholder="Escribe tu e-mail ..."
           pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
           required
@@ -78,7 +84,7 @@ const Form = () => {
         <input
           type="password"
           name="password"
-          value={register.password}
+          value={data.password}
           placeholder="Escribe tu contraseña ..."
           required
           onChange={handleChange}

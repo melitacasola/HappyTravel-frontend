@@ -1,15 +1,14 @@
 "use client"
 
-import React, { useState } from 'react'
+import { useState } from 'react'
 import axios from 'axios';
-import styles from './style.module.css'
+import { loginUser } from '@/app/services/axios';
 import { useRouter } from 'next/navigation'
+import { useAuthContext } from '../../../contexts/authContext';
 import Input from "../Input/Input.jsx"
 import Button from "../Button/Button.jsx"
-import { setSessionCookie } from '../../utils/sessionsUtils';
-import { loginUser } from '@/app/services/axios';
-// import { useAuth } from '../../context/AuthContext';
-import { useAuthContext } from '../../../contexts/authContext';
+import styles from './style.module.css'
+
 
 const LoginUser = () => {
   const [email, setEmail] = useState('')
@@ -19,7 +18,6 @@ const LoginUser = () => {
   const router = useRouter();
 
   const {login} = useAuthContext()
-  // const { setUser, csrfToken } = useAuth();
 
   const handleSubmit = (e) => { 
     e.preventDefault()
@@ -31,7 +29,7 @@ const LoginUser = () => {
 
         loginUser(data).then((response) => {
           login(response.data.access_token)
-          router.push('/admin/dashboard');
+          router.push('/');
           router.refresh()
         
       })

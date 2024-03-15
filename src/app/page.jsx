@@ -2,11 +2,16 @@
 import React, { useState, useEffect } from "react";
 import Destinations from "./components/DestinationCard/Destinations";
 import PaginationButtons from "./components/PaginationButtons/PaginationButtons";
-import { getDestinations } from "./services/axios";
+import { deleteDestination, getDestinations } from "./services/axios";
 import AlertModal from "./components/AlertModal/AlertModal";
+import { useAuthContext } from "../contexts/authContext";
 
-export default function Home({ searchParams,isAuthenticated }) {
+export default function Home({ searchParams }) {
   const query = searchParams?.query;
+
+  const { getAuthToken,isAuthenticated } = useAuthContext()
+
+
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [destinations, setDestinations] = useState([]);
@@ -31,6 +36,7 @@ export default function Home({ searchParams,isAuthenticated }) {
     fetchData(currentPage);
   }, [currentPage]);
 
+
   const handlePageUpdate = async (page) => {
     setCurrentPage(page);
 
@@ -43,11 +49,16 @@ export default function Home({ searchParams,isAuthenticated }) {
     setShowAlertModal(true); 
   };
 
-  const handleDeleteConfirm = () => {
-    // Aquí puedes implementar la lógica para eliminar el destino
-    console.log("Eliminar destino:", destinationToDelete);
-    setShowAlertModal(false);
-    // Lógica adicional para eliminar el destino del estado o de la base de datos
+ const handleDeleteConfirm = async () => {
+    try {
+      // Aquí puedes implementar la lógica para eliminar el destino
+      await deleteDestination(destinationToDelete.id);
+      console.log("Destino eliminado:", destinationToDelete);
+      setShowAlertModal(false);
+      // Lógica adicional para eliminar el destino del estado o de la base de datos
+    } catch (error) {
+      console.error("Error al eliminar el destino:", error);
+    }
   };
 
 
@@ -57,16 +68,23 @@ export default function Home({ searchParams,isAuthenticated }) {
         {loading ? (
           <p>Cargando...</p>
         ) : (
+          // <>
+          //   {showAlertModal && <AlertModal text={`¿Estás seguro de que deseas eliminar este destino?`} onClose={() => setShowAlertModal(false)} />}
+          //   <Destinations destinations={destinations} query={query} onDeleteButtonClick={handleDeleteButtonClick} isAuthenticated={isAuthenticated} showAlertModal={showAlertModal} setShowAlertModal={setShowAlertModal} />
+          //   {isAuthenticated && ( // Mostrar los botones solo si el usuario está autenticado
+          //     <div className="hidden md:block">
+          //       <PaginationButtons currentPage={currentPage} totalPages={totalPages} updatePage={handlePageUpdate} />
+          //     </div>
+          //   )}
+          // </>
           <>
-            {showAlertModal && <AlertModal text={`¿Estás seguro de que deseas eliminar este destino?`} onClose={() => setShowAlertModal(false)} />}
-          
-            <Destinations destinations={destinations} isAuthenticated={isAuthenticated} query={query} onDeleteButtonClick={handleDeleteButtonClick} showAlertModal={showAlertModal}
-  setShowAlertModal={setShowAlertModal} />
-
+          {/* {showAlertModal && <AlertModal text={`¿Estás seguro de que deseas eliminar este destino?`} onClose={() => setShowAlertModal(false)} />} */}
+            <Destinations destinations={destinations} query={query} isAuthenticated={isAuthenticated} />
             <div className="hidden md:block">
               <PaginationButtons currentPage={currentPage} totalPages={totalPages} updatePage={handlePageUpdate} />
             </div>
-          </>
+          
+        </>
         )}
       </div>
     </main>

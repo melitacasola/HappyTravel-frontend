@@ -1,8 +1,13 @@
-import React from 'react';
+
 import Link from 'next/link';
 import Image from 'next/image';
+import axios from "axios";
+
 
 const NavBar = () => {
+
+    
+
     return (
         <nav>
             <ul className="flex items-center space-x-4">
@@ -24,8 +29,6 @@ const NavBar = () => {
                             width={40} height={40} 
                             className="Avatar-icon"
                         />
-
-
                     </Link>
                 </li>
 

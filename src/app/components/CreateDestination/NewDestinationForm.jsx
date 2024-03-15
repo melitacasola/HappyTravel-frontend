@@ -1,21 +1,13 @@
 "use client";
 import { useState } from "react";
-//import Button from "@/app/components/Button/Button";
-//import { useRouter } from "next/navigation";
 import { createDestination } from "../../services/axios";
-//import { getSessionData } from '../../utils/sessionsUtils';
-//import { useAuth } from "../../context/AuthContext";
 import { useAuthContext } from "../../../contexts/authContext";
 import axios from "axios";
+import { useRouter } from "next/navigation";
+
 
 const NewDestinationForm = () => {
-  // const { user, setUser, csrfToken, can, hasRole } = useAuth();
-  // const handleLogin = async () => {
-  //     await csrfToken();
-  //     // Realiza la lógica de inicio de sesión y actualiza el usuario
-  //     setUser(newUser);
-  // };
-
+  const router = useRouter()
   const { getAuthToken } = useAuthContext();
 
   const [formData, setFormData] = useState({
@@ -27,27 +19,43 @@ const NewDestinationForm = () => {
 
   const [errorMessage, setErrorMessage] = useState("");
 
+  const handleImageChange = (e) => {
+    setFormData({ ...formData, image: e.target.files[0] });  
+  };
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const authToken = getAuthToken(); // Obtener el token de autenticación del contexto
-    axios
+
+    const authToken = getAuthToken(); 
+    console.log(authToken, 'authToken new destination,,, anda el Get');
+
+    await axios
       .get("/sanctum/csrf-cookie")
       .then(async (response) => {
-        console.log("Response de /sanctum/csrf-cookie:", response);
+
         try {
-          const responseData = await createDestination(formData, authToken);
-          console.log("responseData", responseData);
+          const formDataToSend = new FormData();
+          formDataToSend.append("title", formData.title);
+          formDataToSend.append("location", formData.location);
+          formDataToSend.append("image", formData.image);
+          formDataToSend.append("description", formData.description);
+      
+          const responseData = await createDestination(formDataToSend, authToken);
+          router.push('/');
+          // router.refresh()
+
         } catch (error) {
-          console.error("Error al crear el destino (obtener el token CSRF):", error);
+          
           setErrorMessage("Error al crear el destino. Por favor, inténtalo de nuevo más tarde.");
         }
       })
       .catch((error) => {
-        console.error("Error al obtener el token CSRF:", error);
+        console.error( error);
+
         setErrorMessage("Error al obtener el token CSRF. Por favor, inténtalo de nuevo más tarde.");
       });
   };
@@ -125,10 +133,12 @@ const NewDestinationForm = () => {
                 id="image"
                 type="file"
                 name="image"
-                onChange={handleChange}
+                onChange={handleImageChange}
                 required
-                className="bg-yellow-100 w-full h-10 rounded-full text-transparent p-0 shadow-[inset_0px_4px_4px_#00000040]"
+                placeholder="Selecciona una imagen..."
+                className="bg-yellow-100 w-full h-10 rounded-full text-blue-500 p-0 shadow-[inset_0px_4px_4px_#00000040]"
               />
+              
             </div>
 
             <div className="flex flex-row mt-8 gap-1">

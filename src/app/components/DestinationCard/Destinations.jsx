@@ -2,7 +2,7 @@
 import DestinationCard from "./DestinationCard";
 import { filterData } from "@/app/utils/filterData";
 
-const Destinations = ({ destinations, query,showAlertModal, setShowAlertModal }) => {
+const Destinations = ({ destinations, query }) => {
   const filteredData = destinations ? filterData(destinations, query) : [];
 
   return (
