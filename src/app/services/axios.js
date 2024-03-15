@@ -7,7 +7,6 @@ axios.defaults.withCredentials = true;
 
 axios.defaults.baseURL = urlAPI;
 
-
 export const getDestinations = async (page) => {
   try {
     const response = await axios.get(`api/destinations?page=${page}`);
@@ -37,30 +36,30 @@ export const loginUser = async (userData) => {
 };
 
 export const logoutUser = async (authToken) => {
-  // let config = {
-  //   headers: {
-  //     "X-XSRF-TOKEN": Cookies.get("XSRF-TOKEN"), 
-  //       Authorization: `Bearer ${authToken}`,
-      
-  //   },
-  // };
-  // try {
-  //   const response = await axios.delete("api/logout", config);
+  try {
+    //console.log("authToken:", authToken);
 
-  //   return response.data;
-  // } catch (error) {
-  //   console.error("Error al realizar la solicitud de cierre de sesión:", error);
-  //   throw error;
-  // }
-  const response = await axios.post('/api/logout');
-  try{
-    console.log(response.data.message); 
+    const response = await axios.post("/api/logout", authToken, {
+      headers: {
+        "X-XSRF-TOKEN": Cookies.get("XSRF-TOKEN"),
+        Authorization: `Bearer ${authToken}`,
+      },
+    });
+
+    //console.log(response, "response del axios para hacer delete");
+
+    if (response && response.data) {
+      console.log("RESPONSE response.data del delete:", response.data);
+      return response.data;
+    } else {
+      //console.error("La respuesta no contiene datos:", response);
+      throw new Error("La respuesta no contiene datos");
+    }
   } catch (error) {
-    console.error('Error al cerrar sesión:', error.response.data);
-    // Manejar errores de logout
+    //console.error("Error al realizar la solicitud de cierre de sesión:", error);
+    throw error;
   }
 };
-
 
 export const createDestination = async (destinationData, authToken) => {
   try {
@@ -69,8 +68,8 @@ export const createDestination = async (destinationData, authToken) => {
 
     const response = await axios.post("/api/destinations", destinationData, {
       headers: {
-        "X-XSRF-TOKEN": Cookies.get("XSRF-TOKEN"), 
-        Authorization: `Bearer ${authToken}`, 
+        "X-XSRF-TOKEN": Cookies.get("XSRF-TOKEN"),
+        Authorization: `Bearer ${authToken}`,
       },
     });
 
@@ -79,7 +78,6 @@ export const createDestination = async (destinationData, authToken) => {
     if (response && response.data) {
       console.log("RESPONSE ?? qué llega?:", response.data);
       return response.data;
-      
     } else {
       console.error("La respuesta no contiene datos:", response);
       throw new Error("La respuesta no contiene datos");
@@ -103,12 +101,12 @@ export const updateDestination = async (destinationId, destinationData) => {
 
 export const deleteDestination = async (destinationId, authToken) => {
   try {
-    const response = await axios.delete(`api/destinations/${destinationId}`, destinationId,{
+    const response = await axios.delete(`api/destinations/${destinationId}`, destinationId, {
       headers: {
-      "X-XSRF-TOKEN": Cookies.get("XSRF-TOKEN"), 
-      Authorization: `Bearer ${authToken}`, 
-    },
-  });
+        "X-XSRF-TOKEN": Cookies.get("XSRF-TOKEN"),
+        Authorization: `Bearer ${authToken}`,
+      },
+    });
     return response.data;
   } catch (error) {
     console.error("Error al eliminar el destino:", error);
