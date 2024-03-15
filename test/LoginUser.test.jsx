@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
-import LoginUser from './LoginUser';
+import LoginUser from '../src/app/components/LoginUser/LoginUser';
 import axios from 'axios'; 
 jest.mock('axios'); // para controlar las respuestas
 
