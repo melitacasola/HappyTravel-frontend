@@ -37,8 +37,6 @@ export const loginUser = async (userData) => {
 
 export const logoutUser = async (authToken) => {
   try {
-    //console.log("authToken:", authToken);
-
     const response = await axios.post("/api/logout", authToken, {
       headers: {
         "X-XSRF-TOKEN": Cookies.get("XSRF-TOKEN"),
@@ -46,17 +44,13 @@ export const logoutUser = async (authToken) => {
       },
     });
 
-    //console.log(response, "response del axios para hacer delete");
-
     if (response && response.data) {
       console.log("RESPONSE response.data del delete:", response.data);
       return response.data;
     } else {
-      //console.error("La respuesta no contiene datos:", response);
       throw new Error("La respuesta no contiene datos");
     }
   } catch (error) {
-    //console.error("Error al realizar la solicitud de cierre de sesión:", error);
     throw error;
   }
 };
