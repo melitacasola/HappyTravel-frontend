@@ -62,6 +62,7 @@ const DestinationCard = ({ data}) => {
                 </Link>
                 <p className={textStyle}>{item.location}</p>
               </div>
+              
               {isAuthenticated && ( // Mostrar los botones solo si el usuario está autenticado
               <div className="flex flex-row gap-2 p-3">
                 <EditButton />

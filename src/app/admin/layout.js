@@ -4,10 +4,9 @@
 
 function Layout({ children }) {
 
-    return (<div>
-                <h1> esto aca</h1>
-                {children}
-            </div>)
+    return <div>
+            {children}
+            </div>
 }
 
 export default Layout;

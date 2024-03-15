@@ -29,7 +29,7 @@ const PaginationButtons = ({ currentPage, totalPages, updatePage }) => {
 
         <p className="text-text-color text-[25px] ">{currentPage}</p>
         <a
-          className={`flex items-center w-[60px] h-[40px] bg-text-color rounded-[20px] flex items-center justify-center cursor-pointer ${
+          className={` w-[60px] h-[40px] bg-text-color rounded-[20px] flex items-center justify-center cursor-pointer ${
             currentPage === totalPages ? "pointer-events-none" : ""
           }`}
           onClick={handleNextPage}
