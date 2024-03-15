@@ -1,12 +1,10 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import axios from "axios";
 
 
 const NavBar = () => {
 
-    
 
     return (
         <nav>

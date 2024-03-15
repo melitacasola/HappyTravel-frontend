@@ -92,12 +92,15 @@ const Form = () => {
         />
         <div className={buttonsWrapper}>
           <Button type="submit" text="Aceptar" isPrimary={true} />
-          <Button text="Cancelar" isPrimary={false} />
+          <Link href='/'>
+            <button className='bg-secondary text-bg-color px-8 py-1 rounded-full cursor-pointer text-xl hover:bg-opacity-80 transition-colors duration-300 flex'>Cancelar</button>
+            </Link>
         </div>
       </form>
       <p className={textStyle}>
         ¿Ya tienes cuenta? Accede{" "}
-        <Link href="/login" className={linkStyle}>
+        <Link 
+        href="/login" className={linkStyle}>
           aquí
         </Link>
       </p>
