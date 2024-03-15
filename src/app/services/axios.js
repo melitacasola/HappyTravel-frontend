@@ -4,7 +4,6 @@ import Cookies from "js-cookie";
 const urlAPI = "http://localhost:8000/";
 
 axios.defaults.withCredentials = true;
-
 axios.defaults.baseURL = urlAPI;
 
 export const getDestinations = async (page) => {
@@ -45,7 +44,6 @@ export const logoutUser = async (authToken) => {
     });
 
     if (response && response.data) {
-      console.log("RESPONSE response.data del delete:", response.data);
       return response.data;
     } else {
       throw new Error("La respuesta no contiene datos");
@@ -57,28 +55,19 @@ export const logoutUser = async (authToken) => {
 
 export const createDestination = async (destinationData, authToken) => {
   try {
-    console.log("destinationData: comienzo del axios", destinationData);
-    console.log("authToken: comienzo del axios,  token", authToken);
-
     const response = await axios.post("/api/destinations", destinationData, {
       headers: {
         "X-XSRF-TOKEN": Cookies.get("XSRF-TOKEN"),
         Authorization: `Bearer ${authToken}`,
       },
     });
-
-    console.log(response, "response del axios... aca no entra....");
-
     if (response && response.data) {
-      console.log("RESPONSE ?? qué llega?:", response.data);
       return response.data;
     } else {
-      console.error("La respuesta no contiene datos:", response);
       throw new Error("La respuesta no contiene datos");
     }
   } catch (error) {
-    console.error("Error al crear el destino:", error);
-    throw error; // Asegúrate de lanzar correctamente el error para que sea capturado en la función handleSubmit
+    throw error;
   }
 };
 
@@ -103,7 +92,6 @@ export const deleteDestination = async (destinationId, authToken) => {
     });
     return response.data;
   } catch (error) {
-    console.error("Error al eliminar el destino:", error);
     throw error;
   }
 };
