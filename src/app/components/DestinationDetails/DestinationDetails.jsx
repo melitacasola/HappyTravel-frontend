@@ -67,7 +67,9 @@ const DestinationDetails = () => {
     setDeletingItemId(destinationId);
     setIsOpen(true);
   };
-
+  const handleDirection = ()=>{
+    router.push(`/admin/editdestination/${destinationId}`) 
+  }
 
   return (
     <div className="m-32 flex flex-row justify-center ">
@@ -93,7 +95,8 @@ const DestinationDetails = () => {
 
                   {isAuthenticated && (
                     <div className="flex flex-row p-4 gap-2">
-                      <EditButton />
+                      <EditButton onClick={()=>handleDirection(`${destination.id}`)}/>
+
                       <DeleteButton onClick={() => {
                         confirmDelete(destination.id)
                       }} />

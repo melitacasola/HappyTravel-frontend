@@ -7,7 +7,8 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 
 
-const NewDestinationForm = () => {
+const NewDestinationForm = ({title}) => {
+  
   const router = useRouter()
   const { getAuthToken } = useAuthContext();
 
@@ -32,8 +33,6 @@ const NewDestinationForm = () => {
     e.preventDefault();
 
     const authToken = getAuthToken(); 
-    console.log(authToken, 'authToken new destination,,, anda el Get');
-
     await axios
       .get("/sanctum/csrf-cookie")
       .then(async (response) => {
@@ -47,7 +46,6 @@ const NewDestinationForm = () => {
       
           const responseData = await createDestination(formDataToSend, authToken);
           router.push('/');
-          // router.refresh()
 
         } catch (error) {
           
@@ -63,7 +61,7 @@ const NewDestinationForm = () => {
 
   return (
     <div className="w-full sm:w-72 sm:h-9/11 lg:w-96 lg:h-9/11 xl:w-full xl:h-9/11 bg-white border-4 rounded-3xl border-yellow-100 p-5">
-      <h1 className="text-center text-4xl text-pink-500">Crear destino</h1>
+      <h1 className="text-center text-4xl text-pink-500">{title}</h1>
       <form
         onSubmit={handleSubmit}
         className="flex flex-row items-center justify-center bg-white h-full rounded-b-xl pr-1 border-t-2 border-pink-500 text-lg"

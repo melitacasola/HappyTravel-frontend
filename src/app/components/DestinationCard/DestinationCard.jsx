@@ -61,6 +61,7 @@ const DestinationCard = ({ data}) => {
     setDeletingItemId(id);
     setIsOpen(true);
   };
+
   
 
   return (
@@ -93,7 +94,8 @@ const DestinationCard = ({ data}) => {
               
               {isAuthenticated && ( 
               <div className="flex flex-row gap-2 p-3">
-                <EditButton />
+                <Link href={`/admin/editdestination/${item.id}`}><EditButton/></Link>
+                
                 <DeleteButton onClick={() => {
                   confirmDelete(item.id)
                   }} />

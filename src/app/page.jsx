@@ -2,9 +2,8 @@
 import React, { useState, useEffect } from "react";
 import Destinations from "./components/DestinationCard/Destinations";
 import PaginationButtons from "./components/PaginationButtons/PaginationButtons";
-import { deleteDestination, getDestinations } from "./services/axios";
-import AlertModal from "./components/AlertModal/AlertModal";
-import { useAuthContext } from "../contexts/authContext";
+import { getDestinations } from "./services/axios";
+
 
 export default function Home({ searchParams }) {
   const query = searchParams?.query;

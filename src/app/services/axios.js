@@ -91,12 +91,23 @@ export const createDestination = async (destinationData, authToken) => {
   }
 };
 
-export const updateDestination = async (destinationId, destinationData) => {
+export const updateDestination = async (destinationId, destinationData, authToken) => {
   try {
-    const response = await axios.post(`api/destinations/${destinationId}`, destinationData);
-    return response.data;
+    const response = await axios.post(`api/destinations/${destinationId}`, destinationData, {
+      headers: {
+        Authorization: `Bearer ${authToken}`
+      }
+    });
+    if (response && response.data) {
+      
+      return response.data;
+    } else {
+      console.error("La respuesta no contiene datos:", response);
+      throw new Error("La respuesta no contiene datos");
+    }
   } catch (error) {
-    throw error.response.data;
+    console.error("Error al crear el destino:", error);
+    throw error; 
   }
 };
 
