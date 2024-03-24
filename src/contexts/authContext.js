@@ -5,7 +5,7 @@ import {
     useCallback,
     useContext,
     useMemo,
-    useState
+   
 } from "react";
 import Cookies from "js-cookie";
 
@@ -13,25 +13,27 @@ export const AuthContext = createContext({
     login: (authTokens) => { },
     logout: () => { },
     getAuthToken: () => null,
-    isAuthenticated: () =>false,
+    
 });
 
 export default function AuthContextProvider({ children }) {
-    const [isAuthenticated, setIsAuthenticated] = useState(false);
+    
 
     const login = useCallback(function (authTokens) {
-        Cookies.set("authTokens", JSON.stringify(authTokens));
-        setIsAuthenticated(true);
+        Cookies.set("authTokens", authTokens);
+        
     }, []);
+    
 
     const logout = useCallback(function () {
+      
         Cookies.remove("authTokens");
-        setIsAuthenticated(false);
+        
     }, []);
 
     const getAuthToken = useCallback(() => {
         const authTokens = Cookies.get("authTokens");
-        return authTokens ? JSON.parse(authTokens) : null;
+        return authTokens ? authTokens : null;
     }, []);
 
     const value = useMemo(
@@ -40,9 +42,8 @@ export default function AuthContextProvider({ children }) {
             login,
             logout,
             getAuthToken,
-            isAuthenticated
         }),
-        [ login, logout, getAuthToken, isAuthenticated]
+        [ login, logout, getAuthToken]
     );
 
     return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

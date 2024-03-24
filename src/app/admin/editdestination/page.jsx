@@ -18,7 +18,7 @@ export default function NewDestination() {
         <div className=""> {/* Oculta en pantallas medianas y grandes */}
           <div>
             <div className="flex justify-center items-center">
-              <div className="mb-6 h-auto">
+              <div className="mb-6 ">
                 <LogoMobile />
               </div>
             </div>

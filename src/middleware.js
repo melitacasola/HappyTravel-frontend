@@ -12,11 +12,14 @@ export function middleware(request) {
     if (authTokens && request.nextUrl.pathname.startsWith("/login")) {
         return NextResponse.redirect(new URL("/admin/dashboard", request.url));
     }
+    if (authTokens && request.nextUrl.pathname.startsWith("/register")) {
+        return NextResponse.redirect(new URL("/admin/dashboard", request.url));
+    }
 
     return null;
 }
     
     export const config = {
-        matcher: ["/admin/:path*", "/login"],
+        matcher: ["/admin/:path*", "/login", "/register"],
 }
 

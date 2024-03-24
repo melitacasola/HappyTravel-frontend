@@ -4,6 +4,7 @@ import { createDestination } from "../../services/axios";
 import { useAuthContext } from "../../../contexts/authContext";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 
 const NewDestinationForm = () => {
@@ -80,7 +81,7 @@ const NewDestinationForm = () => {
               name="title"
               value={formData.title}
               onChange={handleChange}
-              required
+              
               id="title"
               className="block w-full p-1.5 rounded-full bg-yellow-100 text-xs input-height shadow-[inset_0px_4px_4px_#00000040] placeholder:text-blue-500 placeholder:text-lg placeholder:font-light"
               placeholder="Escribe tu nombre..."
@@ -98,7 +99,7 @@ const NewDestinationForm = () => {
               name="location"
               value={formData.location}
               onChange={handleChange}
-              required
+              
               id="location"
               className="block w-full p-1.5 rounded-full bg-yellow-100 text-xs input-height shadow-[inset_0px_4px_4px_#00000040] placeholder:text-blue-500 placeholder:text-lg placeholder:font-light"
               placeholder="Escribe tu nombre..."
@@ -134,7 +135,7 @@ const NewDestinationForm = () => {
                 type="file"
                 name="image"
                 onChange={handleImageChange}
-                required
+                
                 placeholder="Selecciona una imagen..."
                 className="bg-yellow-100 w-full h-10 rounded-full text-blue-500 p-0 shadow-[inset_0px_4px_4px_#00000040]"
               />
@@ -150,12 +151,13 @@ const NewDestinationForm = () => {
               >
                 Aceptar
               </button>
+              <Link href={`/`}>
               <button
-                text="Cancelar"
                 className="text-bg-color bg-secondary px-8 py-1 rounded-full cursor-pointer text-xl hover:bg-opacity-80 transition-colors duration-300 flex"
               >
                 Cancelar
               </button>
+              </Link>
             </div>
           </div>
         </div>
@@ -171,7 +173,7 @@ const NewDestinationForm = () => {
             name="description"
             value={formData.description}
             onChange={handleChange}
-            required
+            
             rows="3"
             className="pt-2 pl-4 my-6 mt-1 h-80 w-full text-sm text-text-color bg-yellow-100 rounded-3xl shadow-[inset_0px_4px_4px_#00000040] textarea-height font-jaldi placeholder:text-blue-500 placeholder:text-lg placeholder:font-light"
             placeholder="Escribe tu nombre..."

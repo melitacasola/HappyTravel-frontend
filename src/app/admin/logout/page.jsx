@@ -10,14 +10,19 @@ export default function Page() {
   const { getAuthToken, logout } = useAuthContext();
 
   useEffect(() => {
-    const authToken = getAuthToken(); // Obtenemos el token de autenticación
-    logoutUser(authToken) // Pasamos el token de autenticación a la función logoutUser
+    const authToken = getAuthToken(); 
+    
+    logout(); 
+    logoutUser(authToken) 
       .then(() => {
-        logout(); // Cerramos sesión en el contexto de autenticación
-        router.push("/"); // Redirigimos después de cerrar sesión
+        router.push("/");
+        router.refresh()
+
       })
       .catch((error) => {
-        console.error("Error al cerrar sesión:", error.response.data);
+        console.error("Error al cerrar sesión:", error);
+        router.refresh()
+
       });
   }, []);
 
