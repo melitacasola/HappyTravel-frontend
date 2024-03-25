@@ -2,8 +2,8 @@
 
 import Image from 'next/image';
 
-export const EditButton = () => (
-  <div className="cursor-pointer">
+export const EditButton = ({ onClick }) => (
+  <div className="cursor-pointer" onClick={onClick}>
     <Image
       src="/assets/edit-icon.svg"
       width={31}

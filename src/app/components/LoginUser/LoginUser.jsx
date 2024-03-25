@@ -74,7 +74,7 @@ const LoginUser = () => {
           {errorMessage && <p className='text-red-500'>{errorMessage}</p>}
           <div className='flex flex-row place-content-evenly items-center mb-4'>
             {/* <Button type="submit" text="Accept" isLoading={loading} /> */}
-            <button className='bg-primary text-bg-color px-8 py-1 rounded-full cursor-pointer text-xl hover:bg-opacity-80 transition-colors duration-300 flex' type="submit" isLoading={loading}>Acceptar</button>
+            <button className='bg-primary text-bg-color px-8 py-1 rounded-full cursor-pointer text-xl hover:bg-opacity-80 transition-colors duration-300 flex' type="submit">Acceptar</button>
             <Button className={styles.buttonSecondary} text="Cancel" onClick={() => router.push('../../layout.js')} />
           </div>
         </form>

@@ -41,7 +41,8 @@ const Form = () => {
     axios.get('/sanctum/csrf-cookie').then(response => {
       registerUser(data)
         .then((res) => {
-          login(res.remember_token)
+
+          login(res.token)
           router.push("/");
           router.refresh()
         })

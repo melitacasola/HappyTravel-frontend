@@ -1,3 +1,4 @@
+import Image from "next/image";
 import React from "react";
 
 const PaginationButtons = ({ currentPage, totalPages, updatePage }) => {
@@ -23,8 +24,8 @@ const PaginationButtons = ({ currentPage, totalPages, updatePage }) => {
           onClick={handlePrevPage}
           disabled={currentPage === 1}
         >
-          <img className="w-[14px] h-[23px] " alt="Previous page" src="./Assets/Vector 3.svg" />
-          <img className="w-[14px] h-[23px] " alt="Previous page" src="./Assets/Vector 4.svg" />
+          <Image width={14} height={23} alt="Next page" src="/Assets/Vector 3.svg" />
+          <Image width={14} height={23} alt="Next page" src="/Assets/Vector 4.svg" />
         </a>
 
         <p className="text-text-color text-[25px] ">{currentPage}</p>
@@ -35,8 +36,8 @@ const PaginationButtons = ({ currentPage, totalPages, updatePage }) => {
           onClick={handleNextPage}
           disabled={currentPage === totalPages}
         >
-          <img className="w-[14px] h-[23px] rotate-[-180.00deg]" alt="Next page" src="./Assets/Vector 3.svg" />
-          <img className="w-[14px] h-[23px] rotate-[-180.00deg]" alt="Next page" src="./Assets/Vector 4.svg" />
+          <Image width={14} height={23} className="rotate-[-180.00deg]" alt="Next page" src="/Assets/Vector 3.svg" />
+          <Image className="rotate-[-180.00deg]" alt="Next page" src="/Assets/Vector 4.svg" height={23} width={14}/>
         </a>
       </div>
     </div>
