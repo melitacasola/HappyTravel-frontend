@@ -55,44 +55,34 @@ const EditDestinationForm = ({ title }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const authToken = getAuthToken();
-        await axios
-            .get("/sanctum/csrf-cookie")
-            .then(async (response) => {
+        const formDataToSend = new FormData();
+        formDataToSend.append("title", formData.title);
+        formDataToSend.append("location", formData.location);
+        formDataToSend.append("description", formData.description);
+        formDataToSend.append("image", formData.image);
 
-                try {
-                    const formDataToSend = new FormData();
-                    formDataToSend.append("title", formData.title);
-                    formDataToSend.append("location", formData.location);
-                    formDataToSend.append("description", formData.description);
-                    formDataToSend.append("image", formData.image); 
+        updateDestination(destinationId, formDataToSend).then((res) => {
 
-                    const responseData = await updateDestination(destinationId, formDataToSend, authToken);
-                    
-                    router.push('/');
-
-
-                } catch (error) {
-
-                    setErrorMessage(error);
-                }
-            })
+            router.push('/');
+        })
             .catch((error) => {
-                console.error(error);
+                console.error(error.response);
 
-                setErrorMessage("Error al obtener el token CSRF. Por favor, inténtalo de nuevo más tarde.");
+                const errorMessage = error.response?.data?.message || "An error occurred.";
+                console.error(errorMessage);
+                setErrorMessage(errorMessage);
             });
     };
 
     return (
-        <div className="w-full sm:w-72 sm:h-9/11 lg:w-96 lg:h-9/11 xl:w-full xl:h-9/11 bg-white border-4 rounded-3xl border-yellow-100 p-5">
-            <h1 className="text-center text-4xl text-pink-500">{title}</h1>
+        <div className="border-4 rounded-3xl border-yellow-100 p-4 h-auto flex flex-col items-center justify-center mt-2 w-full">
+            <h1 className="text-center text-2xl md:text-4xl text-pink-500">{title}</h1>
             <form
                 onSubmit={handleSubmit}
-                className="flex flex-row items-center justify-center bg-white h-full rounded-b-xl pr-1 border-t-2 border-pink-500 text-lg"
+                className="flex flex-col items-center border-t-2 border-pink-500 w-full my-3 mx-5 md:flex-row md:justify-center rounded-b-xl pr-1 text-lg"
             >
-                <div className="bg-white h-full w-1/2 pt-6 ml-2">
-                    <div className="mr-7">
+                <div className="w-full p-2">
+                    <div className="md:mr-7">
                         <label
                             htmlFor="title"
                             className="block mb-2 text-xl text-blue-500 dark:text-white font-semibold font-jaldi"
@@ -106,8 +96,7 @@ const EditDestinationForm = ({ title }) => {
                             onChange={handleChange}
 
                             id="title"
-                            className="block w-full p-1.5 rounded-full bg-yellow-100 text-xs input-height shadow-[inset_0px_4px_4px_#00000040] placeholder:text-blue-500 placeholder:text-lg placeholder:font-light"
-                            placeholder="Escribe tu nombre..."
+                            className="block w-full p-1.5 rounded-full bg-yellow-100 text-xs input-height shadow-[inset_0px_4px_4px_#00000040] placeholder:text-blue-500 placeholder:text-lg placeholder:font-light" placeholder="Escribe tu nombre..."
                             style={{ paddingTop: "15px", paddingLeft: "20px" }}
                         />
 
@@ -158,15 +147,15 @@ const EditDestinationForm = ({ title }) => {
                                 type="file"
                                 name="image"
                                 onChange={handleImageChange}
-                                
+
                                 placeholder="Selecciona una imagen..."
                                 className="bg-yellow-100 w-full h-10 rounded-full text-blue-500 p-0 shadow-[inset_0px_4px_4px_#00000040]"
                             />
 
                         </div>
 
-                        <div className="flex flex-row mt-8 gap-1">
-                            
+                        <div className="hidden md:flex flex-row mt-8 gap-1">
+
                             <button
                                 type="submit"
                                 text="Aceptar"
@@ -184,7 +173,7 @@ const EditDestinationForm = ({ title }) => {
                         </div>
                     </div>
                 </div>
-                <div className="w-1/2 bg-white h-96 p-2 rounded-xl">
+                <div className="m-0 w-full">
                     <label
                         htmlFor="description"
                         className="block my-2 text-xl font-semibold font-jaldi text-blue-500 dark:text-white m-1.5 mt-3.5"
@@ -199,8 +188,23 @@ const EditDestinationForm = ({ title }) => {
 
                         rows="3"
                         className="pt-2 pl-4 my-6 mt-1 h-80 w-full text-sm text-text-color bg-yellow-100 rounded-3xl shadow-[inset_0px_4px_4px_#00000040] textarea-height font-jaldi placeholder:text-blue-500 placeholder:text-lg placeholder:font-light"
-                        placeholder="Escribe tu nombre..."
+                        placeholder="descripcion..."
                     ></textarea>
+                </div>
+                <div className=" md:hidden flex flex-row gap-2 mt-6">
+                    <button
+                        type="submit"
+                        text="Aceptar"
+                        className="text-bg-color bg-primary px-8 py-1 rounded-full cursor-pointer text-xl hover:bg-opacity-80 transition-colors duration-300 flex"
+                    >
+                        Aceptar
+                    </button>
+                    <button
+                        text="Cancelar"
+                        className="text-bg-color bg-secondary px-8 py-1 rounded-full cursor-pointer text-xl hover:bg-opacity-80 transition-colors duration-300 flex"
+                    >
+                        Cancelar
+                    </button>
                 </div>
             </form>
             {errorMessage && <p className="tu-clase-error">{errorMessage}</p>}

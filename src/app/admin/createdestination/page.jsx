@@ -17,11 +17,6 @@ export default function NewDestination() {
       <div className='p-6 md:hidden'>
         <div className=""> 
           <div>
-            {/* <div className="flex justify-center items-center">
-              <div className="mb-6 h-auto">
-                <LogoMobile />
-              </div>
-            </div> */}
             <NewDestinationMobile title="Crear Destino"/>
           </div>
         </div>

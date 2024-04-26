@@ -37,22 +37,14 @@ export const loginUser = async (userData) => {
 
 export const logoutUser = async (authToken) => {
   try {
-    
-    const response = await axios.post("/api/logout", authToken, {
+
+    const response = await axios.post("/api/logout", {}, {
       headers: {
-        "X-XSRF-TOKEN": Cookies.get("XSRF-TOKEN"),
-        Authorization: `Bearer ${authToken}`,
-      },
+        Authorization: `Bearer ${authToken}`
+      }
     });
-
-    if (response && response.data) {
-
-      return response.data;
-    } else {
-      throw new Error("La respuesta no contiene datos");
-    }
   } catch (error) {
-    throw error;
+    console.error(error.response.data);
   }
 };
 
@@ -67,47 +59,41 @@ export const getDestinationId = async (destinationId) => {
 };
 
 
-export const createDestination = async (destinationData, authToken) => {
+export const createDestination = async (destinationData) => {
   try {
-
+    const token = Cookies.get('laravel_session')
+    const headers = {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'multipart/form-data'
+    }
     const response = await axios.post("/api/destinations", destinationData, {
-      headers: {
-        "X-XSRF-TOKEN": Cookies.get("XSRF-TOKEN"),
-        Authorization: `Bearer ${authToken}`,
-      },
+      headers
     });
 
+    return response.data;
 
-    if (response && response.data) {
-      
-      return response.data;
-    } else {
-      console.error("La respuesta no contiene datos:", response);
-      throw new Error("La respuesta no contiene datos");
-    }
   } catch (error) {
     console.error("Error al crear el destino:", error);
-    throw error; 
+    throw error;
   }
 };
 
-export const updateDestination = async (destinationId, destinationData, authToken) => {
+export const updateDestination = async (destinationId, destinationData) => {
   try {
-    const response = await axios.post(`api/destinations/${destinationId}`, destinationData, {
-      headers: {
-        Authorization: `Bearer ${authToken}`
-      }
-    });
-    if (response && response.data) {
-      
-      return response.data;
-    } else {
-      console.error("La respuesta no contiene datos:", response);
-      throw new Error("La respuesta no contiene datos");
+    const token = Cookies.get('laravel_session')
+    const headers = {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'multipart/form-data'
     }
+
+    const response = await axios.post(`api/destinations/${destinationId}`, destinationData, {
+      headers
+    });
+    return response.data;
+
   } catch (error) {
-    console.error("Error al crear el destino:", error);
-    throw error; 
+    console.error("Error al crear el destino:", error.response.data.message);
+    throw error;
   }
 };
 

@@ -20,19 +20,21 @@ export default function AuthContextProvider({ children }) {
     
 
     const login = useCallback(function (authTokens) {
-        Cookies.set("authTokens", authTokens);
+        Cookies.set("laravel_session", authTokens);
         
     }, []);
     
 
     const logout = useCallback(function () {
 
-        Cookies.remove("authTokens");
+        Cookies.remove("laravel_session");
+        Cookies.remove("laravel_session", { domain: "localhost" })
+        Cookies.remove("laravel_session", { domain: "localhost", path: "/" });
         
     }, []);
 
     const getAuthToken = useCallback(() => {
-        const authTokens = Cookies.get("authTokens");
+        const authTokens = Cookies.get("laravel_session");
         return authTokens ? authTokens : null;
     }, []);
 

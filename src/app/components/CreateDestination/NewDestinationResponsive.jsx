@@ -1,13 +1,10 @@
 "use client";
 import { useState } from "react";
 import { createDestination } from "../../services/axios";
-import { useAuthContext } from "../../../contexts/authContext";
-import axios from "axios";
 import { useRouter } from "next/navigation";
 
 const NewDestinationMobile = ({ title }) => {
     const router = useRouter()
-    const { getAuthToken } = useAuthContext();
 
     const [formData, setFormData] = useState({
         title: "",
@@ -22,48 +19,26 @@ const NewDestinationMobile = ({ title }) => {
         setFormData({ ...formData, image: e.target.files[0] });
     };
 
-    const [fileAdded, setFileAdded] = useState(false); // Estado para controlar si se ha añadido un archivo
-
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
-    const handleFileChange = (e) => {
-        setFormData({ ...formData, image: e.target.files[0] });
-        setFileAdded(true); // Establecer que se ha añadido un archivo
-    };
-
     const handleSubmit = async (e) => {
         e.preventDefault();
+        const formDataToSend = new FormData();
+        formDataToSend.append("title", formData.title);
+        formDataToSend.append("location", formData.location);
+        formDataToSend.append("image", formData.image);
+        formDataToSend.append("description", formData.description);
 
-        const authToken = getAuthToken();
-        console.log(authToken, 'authToken new destination,,, anda el Get');
+        createDestination(formDataToSend).then((res) => {
 
-        await axios
-            .get("/sanctum/csrf-cookie")
-            .then(async (response) => {
-
-                try {
-                    const formDataToSend = new FormData();
-                    formDataToSend.append("title", formData.title);
-                    formDataToSend.append("location", formData.location);
-                    formDataToSend.append("image", formData.image);
-                    formDataToSend.append("description", formData.description);
-
-                    const responseData = await createDestination(formDataToSend, authToken);
-                    setFileAdded(false)
-                    router.push('/');
-                    router.refresh()
-
-                } catch (error) {
-
-                    setErrorMessage("Error al crear el destino. Por favor, inténtalo de nuevo más tarde.");
-                }
-            })
+            router.push('/');
+        })
             .catch((error) => {
-                console.error(error);
+                console.error(error.response.data.message);
 
-                setErrorMessage("Error al obtener el token CSRF. Por favor, inténtalo de nuevo más tarde.");
+                setErrorMessage(error.response.data.message);
             });
     };
 
@@ -109,10 +84,10 @@ const NewDestinationMobile = ({ title }) => {
                         className="block pt-3 text-xl font-semibold text-blue-500 dark:text-white font-jaldi">
                         Imagen
                     </label>
-                    <div className="relative inline-block h-auto w-full">
+                    <div className="relative inline-block h-auto w-full text-sm">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
-                            className="absolute top-1/2 left-0 transform translate-y-[-0.2rem] fill-current text-white text-center text-xl bg-blue-600 rounded-l-full pl-2.5 pt-2 h-10 shadow-r-lg"
+                            className="absolute top-1/2 left-0 transform translate-y-[-1.3rem] fill-current text-white text-center bg-blue-600 rounded-l-full pl-2.5 pt-2 h-10 shadow-r-lg"
                             width="25%"
                             height="98%"
                             viewBox="0 0 24 24"
@@ -123,7 +98,10 @@ const NewDestinationMobile = ({ title }) => {
                             strokeLinejoin="round"
                         >
                             <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                            <path transform="scale(1.2) translate(-2, -5)" d="M5 4h4l3 3h7a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-11a2 2 0 0 1 2 -2" />
+                            <path
+                                transform="scale(1.1) translate(-3, -4)"
+                                d="M5 4h4l3 3h7a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-11a2 2 0 0 1 2 -2"
+                            />
                         </svg>
                         <input
                             id="image"
@@ -132,9 +110,8 @@ const NewDestinationMobile = ({ title }) => {
                             onChange={handleImageChange}
                             required
                             placeholder="Selecciona una imagen..."
-                            className="bg-yellow-100 w-full h-10 rounded-full text-blue-500 p-0 shadow-[inset_0px_4px_4px_#00000040]"
+                            className="bg-yellow-100 w-full h-10 rounded-full text-blue-500 px-6 shadow-[inset_0px_4px_4px_#00000040]"
                         />
-                        {fileAdded && <p className="text-green-500 mt-2 text-sm">Archivo añadido correctamente</p>}
                     </div>
 
                 </div>
@@ -146,12 +123,12 @@ const NewDestinationMobile = ({ title }) => {
                         ¿Por qué quieres viajar allí?
                     </label>
                     <textarea
-                        id="message"
+                        id="description"
                         name="reason"
                         value={formData.reason}
                         onChange={handleChange}
                         rows="3"
-                        className=" p-4 my-6 mx-0 mt-1 h-72 w-full text-sm text-gray-900 bg-yellow-100 rounded-3xl shadow-[inset_0px_4px_4px_#00000040] textarea-height font-jaldi placeholder:text-blue-500 placeholder:text-lg placeholder:font-light"
+                        className=" p-4 my-6 mx-0 mt-1 h-72 w-full text-sm text-blue-500 bg-yellow-100 rounded-3xl shadow-[inset_0px_4px_4px_#00000040] textarea-height font-jaldi placeholder:text-blue-500 placeholder:text-lg placeholder:font-light"
                         placeholder="Escribe tu mensaje aquí..."
                     ></textarea>
                 </div>

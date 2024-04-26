@@ -23,11 +23,10 @@ const LoginUser = () => {
     e.preventDefault()
     setLoading(true)
 
-    axios.get('/sanctum/csrf-cookie').then(response => {
-
       const data = {email, password};
 
         loginUser(data).then((response) => {
+          
           login(response.data.access_token)
           router.push('/');
           router.refresh()
@@ -36,12 +35,11 @@ const LoginUser = () => {
       
       .catch((error) => {
         console.error('Login failed:', error);
-        setErrorMessage('Failed to log in. Please try again later.');
+        setErrorMessage(error.message);
       })
       .finally(() => {
         setLoading(false);
       });
-    });
 
     
   }

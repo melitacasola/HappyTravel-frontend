@@ -1,16 +1,13 @@
 "use client";
 import { useState } from "react";
 import { createDestination } from "../../services/axios";
-import { useAuthContext } from "../../../contexts/authContext";
-import axios from "axios";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 
 
-const NewDestinationForm = ({title}) => {
-  
-  const router = useRouter()
-  const { getAuthToken } = useAuthContext();
+const NewDestinationForm = ({ title }) => {
+
+  const router = useRouter();
 
   const [formData, setFormData] = useState({
     title: "",
@@ -22,7 +19,7 @@ const NewDestinationForm = ({title}) => {
   const [errorMessage, setErrorMessage] = useState("");
 
   const handleImageChange = (e) => {
-    setFormData({ ...formData, image: e.target.files[0] });  
+    setFormData({ ...formData, image: e.target.files[0] });
   };
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -31,31 +28,20 @@ const NewDestinationForm = ({title}) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const formDataToSend = new FormData();
+    formDataToSend.append("title", formData.title);
+    formDataToSend.append("location", formData.location);
+    formDataToSend.append("image", formData.image);
+    formDataToSend.append("description", formData.description);
 
-    const authToken = getAuthToken(); 
-    await axios
-      .get("/sanctum/csrf-cookie")
-      .then(async (response) => {
+    createDestination(formDataToSend).then((res) => {
 
-        try {
-          const formDataToSend = new FormData();
-          formDataToSend.append("title", formData.title);
-          formDataToSend.append("location", formData.location);
-          formDataToSend.append("image", formData.image);
-          formDataToSend.append("description", formData.description);
-      
-          const responseData = await createDestination(formDataToSend, authToken);
-          router.push('/');
-
-        } catch (error) {
-          
-          setErrorMessage("Error al crear el destino. Por favor, inténtalo de nuevo más tarde.");
-        }
-      })
+      router.push('/');
+    })
       .catch((error) => {
-        console.error( error);
+        console.error(error.response.data.message);
 
-        setErrorMessage("Error al obtener el token CSRF. Por favor, inténtalo de nuevo más tarde.");
+        setErrorMessage(error.response.data.message);
       });
   };
 
@@ -79,7 +65,7 @@ const NewDestinationForm = ({title}) => {
               name="title"
               value={formData.title}
               onChange={handleChange}
-              
+
               id="title"
               className="block w-full p-1.5 rounded-full bg-yellow-100 text-xs input-height shadow-[inset_0px_4px_4px_#00000040] placeholder:text-blue-500 placeholder:text-lg placeholder:font-light"
               placeholder="Escribe tu nombre..."
@@ -97,10 +83,10 @@ const NewDestinationForm = ({title}) => {
               name="location"
               value={formData.location}
               onChange={handleChange}
-              
+
               id="location"
               className="block w-full p-1.5 rounded-full bg-yellow-100 text-xs input-height shadow-[inset_0px_4px_4px_#00000040] placeholder:text-blue-500 placeholder:text-lg placeholder:font-light"
-              placeholder="Escribe tu nombre..."
+              placeholder="Escribe tu localizacion..."
               style={{ paddingTop: "15px", paddingLeft: "20px" }}
             />
             <label
@@ -115,6 +101,7 @@ const NewDestinationForm = ({title}) => {
                 className="absolute top-1/2 left-0 transform translate-y-[-1.3rem] fill-current text-white text-center text-xl bg-blue-600 rounded-l-full pl-2.5 pt-2 h-10 shadow-r-lg"
                 width="20%"
                 height="94%"
+                alt='none'
                 viewBox="0 0 24 24"
                 strokeWidth="1.6"
                 stroke="#fff"
@@ -133,15 +120,14 @@ const NewDestinationForm = ({title}) => {
                 type="file"
                 name="image"
                 onChange={handleImageChange}
-                
+
                 placeholder="Selecciona una imagen..."
                 className="bg-yellow-100 w-full h-10 rounded-full text-blue-500 p-0 shadow-[inset_0px_4px_4px_#00000040]"
               />
-              
+
             </div>
 
             <div className="flex flex-row mt-8 gap-1">
-              {/* <Button type="submit" text="Aceptar" isPrimary={true} /> */}
               <button
                 type="submit"
                 text="Aceptar"
@@ -150,11 +136,11 @@ const NewDestinationForm = ({title}) => {
                 Aceptar
               </button>
               <Link href={`/`}>
-              <button
-                className="text-bg-color bg-secondary px-8 py-1 rounded-full cursor-pointer text-xl hover:bg-opacity-80 transition-colors duration-300 flex"
-              >
-                Cancelar
-              </button>
+                <button
+                  className="text-bg-color bg-secondary px-8 py-1 rounded-full cursor-pointer text-xl hover:bg-opacity-80 transition-colors duration-300 flex"
+                >
+                  Cancelar
+                </button>
               </Link>
             </div>
           </div>
@@ -171,7 +157,7 @@ const NewDestinationForm = ({title}) => {
             name="description"
             value={formData.description}
             onChange={handleChange}
-            
+
             rows="3"
             className="pt-2 pl-4 my-6 mt-1 h-80 w-full text-sm text-text-color bg-yellow-100 rounded-3xl shadow-[inset_0px_4px_4px_#00000040] textarea-height font-jaldi placeholder:text-blue-500 placeholder:text-lg placeholder:font-light"
             placeholder="Escribe tu nombre..."

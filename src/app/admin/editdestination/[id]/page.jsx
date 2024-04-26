@@ -22,7 +22,7 @@ export default function EditDestination() {
                 <LogoMobile />
               </div>
             </div>
-            <NewDestinationMobile title="Editar Destino" />
+            <EditDestinationForm title="Editar Destino" />
           </div>
         </div>
       </div>

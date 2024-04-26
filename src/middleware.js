@@ -3,7 +3,7 @@ import { cookies } from 'next/headers';
 import { NextResponse } from "next/server";
 
 export function middleware(request) {
-    const authTokens = cookies(request).get('authTokens')?.value;
+    const authTokens = cookies(request).get('laravel_session')?.value;
 
     if (request.nextUrl.pathname.startsWith("/admin") && !authTokens) {
         return NextResponse.redirect(new URL("/login", request.url));
