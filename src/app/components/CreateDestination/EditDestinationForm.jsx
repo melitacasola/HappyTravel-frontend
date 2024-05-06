@@ -75,17 +75,17 @@ const EditDestinationForm = ({ title }) => {
     };
 
     return (
-        <div className="border-4 rounded-3xl border-yellow-100 p-4 h-auto flex flex-col items-center justify-center mt-2 w-full">
-            <h1 className="text-center text-2xl md:text-4xl text-pink-500">{title}</h1>
+        <div className="border-4 rounded-3xl border-yellow-100 px-5 py-2 flex flex-col items-center justify-center">
+            <h1 className="text-center text-2xl md:text-4xl text-secondary">{title}</h1>
             <form
                 onSubmit={handleSubmit}
-                className="flex flex-col items-center border-t-2 border-pink-500 w-full my-3 mx-5 md:flex-row md:justify-center rounded-b-xl pr-1 text-lg"
+                className="flex flex-col gap-9 p-2 border-t-2 border-secondary w-full my-3 mx-6 md:flex-row md:justify-center rounded-b-xl text-lg"
             >
-                <div className="w-full p-2">
-                    <div className="md:mr-7">
+                <div className="py-4">
+                    <div className="">
                         <label
                             htmlFor="title"
-                            className="block mb-2 text-xl text-blue-500 dark:text-white font-semibold font-jaldi"
+                            className="block text-xl text-blue-500 dark:text-white font-semibold font-jaldi"
                         >
                             Título
                         </label>
@@ -136,8 +136,9 @@ const EditDestinationForm = ({ title }) => {
                                 strokeLinecap="round"
                                 strokeLinejoin="round"
                             >
-                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                                 <path
+                                    fill="bg-yellow-100"
+                                    className="border-yellow-100 text-yellow-100"
                                     transform="scale(1.1) translate(-3, -4)"
                                     d="M5 4h4l3 3h7a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-11a2 2 0 0 1 2 -2"
                                 />
@@ -154,7 +155,7 @@ const EditDestinationForm = ({ title }) => {
 
                         </div>
 
-                        <div className="hidden md:flex flex-row mt-8 gap-1">
+                        <div className="hidden md:flex flex-row mt-16 gap-1">
 
                             <button
                                 type="submit"
@@ -187,7 +188,7 @@ const EditDestinationForm = ({ title }) => {
                         onChange={handleChange}
 
                         rows="3"
-                        className="pt-2 pl-4 my-6 mt-1 h-80 w-full text-sm text-text-color bg-yellow-100 rounded-3xl shadow-[inset_0px_4px_4px_#00000040] textarea-height font-jaldi placeholder:text-blue-500 placeholder:text-lg placeholder:font-light"
+                        className="pt-2 pl-4 h-80 w-full text-sm text-text-color bg-yellow-100 rounded-3xl shadow-[inset_0px_4px_4px_#00000040] textarea-height font-jaldi placeholder:text-blue-500 placeholder:text-lg placeholder:font-light"
                         placeholder="descripcion..."
                     ></textarea>
                 </div>
