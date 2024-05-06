@@ -13,24 +13,22 @@ export const AuthContext = createContext({
     login: (authTokens) => { },
     logout: () => { },
     getAuthToken: () => null,
-    
+
 });
 
 export default function AuthContextProvider({ children }) {
-    
+
 
     const login = useCallback(function (authTokens) {
         Cookies.set("laravel_session", authTokens);
-        
+
     }, []);
-    
+
 
     const logout = useCallback(function () {
 
         Cookies.remove("laravel_session");
-        Cookies.remove("laravel_session", { domain: "localhost" })
-        Cookies.remove("laravel_session", { domain: "localhost", path: "/" });
-        
+
     }, []);
 
     const getAuthToken = useCallback(() => {
@@ -40,12 +38,12 @@ export default function AuthContextProvider({ children }) {
 
     const value = useMemo(
         () => ({
-            
+
             login,
             logout,
             getAuthToken,
         }),
-        [ login, logout, getAuthToken]
+        [login, logout, getAuthToken]
     );
 
     return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

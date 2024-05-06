@@ -3,7 +3,7 @@
 import Destinations from "@/app/components/DestinationCard/Destinations";
 import { logoutUser } from "@/app/services/axios";
 import { useAuthContext } from "@/contexts/authContext";
-import Link from "next/link";
+
 import { useRouter } from "next/navigation";
 
 export default function PageDashboard() {
@@ -16,13 +16,15 @@ export default function PageDashboard() {
         logout();
         logoutUser(authToken);
         router.push('/');
+        router.refresh()
+
     };
-    
+
     return (
         <div>
             <p className="m-8">
 
-                
+
                 <button onClick={handleLogout} className="bg-yellow-400 text-bg-color px-8 py-1 rounded-full cursor-pointer text-xl hover:bg-opacity-80 transition-colors duration-300 flex">Logout</button>
             </p>
             <div className="flex min-h-screen flex-col items-center justify-between py-14">

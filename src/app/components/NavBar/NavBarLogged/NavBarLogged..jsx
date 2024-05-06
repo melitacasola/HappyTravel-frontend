@@ -1,11 +1,26 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
+import { useAuthContext } from '@/contexts/authContext';
+import { logoutUser } from '@/app/services/axios';
 
-const NavBarLogged = () => {
+const NavBarLogged = ({ handleLogout }) => {
+    const { getAuthToken, logout } = useAuthContext();
+    const router = useRouter();
+
+    const authToken = getAuthToken();
+
+    const handleLogoutBtn = async () => {
+        logout();
+        await logoutUser(authToken);
+        window.location.reload()
+        // handleLogout();
+        router.push('/');
+    };
     return (
         <nav>
-            <ul className="flex items-center space-x-4">
+            <ul className="flex items-center gap-x-4">
                 <li>
                     <Link href="/">
                         <Image
@@ -29,16 +44,16 @@ const NavBarLogged = () => {
                     </Link>
                 </li>
                 <li>
-                    <Link href="/admin/logout">
+                    <button onClick={handleLogoutBtn}>
                         <Image
                             src='/Assets/Logout-icon.svg'
                             alt="Logout icon"
-                            width={40} height={40}
+                            width={47} height={45}
                             className="Logout-icon"
                         />
 
 
-                    </Link>
+                    </button>
                 </li>
 
             </ul>

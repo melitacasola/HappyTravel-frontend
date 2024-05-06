@@ -6,8 +6,9 @@ export const EditButton = ({ onClick }) => (
   <div className="cursor-pointer" onClick={onClick}>
     <Image
       src="/assets/edit-icon.svg"
-      width={31}
-      height={31}
+      alt="edith"
+      width={41}
+      height={41}
     />
   </div>
 );
@@ -17,8 +18,8 @@ export const DeleteButton = ({ onClick }) => (
     <Image
       src="/Assets/Delete-icon.svg"
       alt="Eliminar"
-      width={24}
-      height={24}
+      width={33}
+      height={33}
     />
   </div>
 );

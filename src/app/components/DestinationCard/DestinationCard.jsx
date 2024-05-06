@@ -1,6 +1,5 @@
 import Image from "next/image";
 import Link from "next/link";
-import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useAuthContext } from "../../../contexts/authContext";
 import { deleteDestination } from "../../services/axios";
@@ -9,8 +8,8 @@ import { EditButton, DeleteButton } from "../DestinationCardButtons/DestinationC
 import { useState } from "react";
 import AlertModal from "../AlertModal/AlertModal";
 
-const DestinationCard = ({ data}) => {
-  
+const DestinationCard = ({ data }) => {
+
   /* CSS styles */
   const gridWrapper = `grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-[2rem]`;
   const gridItem = `w-[18.75rem] bg-bg-color rounded-[20px_20px_20px_20px]`;
@@ -28,7 +27,7 @@ const DestinationCard = ({ data}) => {
   const [isOpen, setIsOpen] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [deletingItemId, setDeletingItemId] = useState(null);
-  
+
 
   const handleDelete = async (id) => {
     try {
@@ -37,9 +36,6 @@ const DestinationCard = ({ data}) => {
         console.error("No se encontró el token de autenticación.");
         return;
       }
-
-      await axios.get("/sanctum/csrf-cookie");
-
       await deleteDestination(id, authToken);
       setIsOpen(false);
       handleAfterDelete();
@@ -52,7 +48,7 @@ const DestinationCard = ({ data}) => {
   };
 
   const handleAfterDelete = () => {
-    
+
     router.push("/");
     router.refresh()
     window.location.reload();
@@ -62,7 +58,7 @@ const DestinationCard = ({ data}) => {
     setIsOpen(true);
   };
 
-  
+
 
   return (
     <ul className={gridWrapper}>
@@ -84,27 +80,27 @@ const DestinationCard = ({ data}) => {
                 className={imgStyle}
               />
             </div>
-            <div className="flex flex-row p-4 justify-between">
+            <div className="flex flex-row p-2 justify-between">
               <div>
                 <Link href={`/details/${item.id}`}>
                   <h5 className={titleStyle}>{item.title}</h5>
                 </Link>
                 <p className={textStyle}>{item.location}</p>
               </div>
-              
-              {isAuthenticated && ( 
-              <div className="flex flex-row gap-2 p-3">
-                <Link href={`/admin/editdestination/${item.id}`}><EditButton/></Link>
-                
-                <DeleteButton onClick={() => {
-                  confirmDelete(item.id)
+
+              {isAuthenticated && (
+                <div className="flex flex-row gap-2 p-3">
+                  <Link href={`/admin/editdestination/${item.id}`}><EditButton /></Link>
+
+                  <DeleteButton onClick={() => {
+                    confirmDelete(item.id)
                   }} />
-              </div>
-            )}
+                </div>
+              )}
             </div>
           </li>
         ))}
-        <AlertModal 
+      <AlertModal
         isOpen={isOpen}
         onClose={() => setIsOpen(false)}
         text="¿Estás seguro de que deseas eliminar este destino?"
@@ -114,9 +110,9 @@ const DestinationCard = ({ data}) => {
           setDeletingItemId(null);
           setIsOpen(false);
         }}
-        
 
-        /> 
+
+      />
     </ul>
   );
 };
