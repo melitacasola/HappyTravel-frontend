@@ -12,7 +12,7 @@ export default function Home({ searchParams }) {
   const [totalPages, setTotalPages] = useState(1);
   const [destinations, setDestinations] = useState([]);
   const [loading, setLoading] = useState(false);
-  
+
 
   useEffect(() => {
     const fetchData = async (page) => {
@@ -38,9 +38,6 @@ export default function Home({ searchParams }) {
     const response = await getDestinations(currentPage);
     setDestinations(response.data);
   };
-  
-
-
 
 
   return (
@@ -49,15 +46,21 @@ export default function Home({ searchParams }) {
         {loading ? (
           <p>Cargando...</p>
         ) : (
-          
+
           <>
-          
-            <Destinations destinations={destinations} query={query}  />
-            <div className="hidden md:block">
-              <PaginationButtons currentPage={currentPage} totalPages={totalPages} updatePage={handlePageUpdate} />
-            </div>
-          
-        </>
+
+            <Destinations destinations={destinations} query={query} />
+
+            {
+              (totalPages > 1) && (
+
+                <div className="hidden md:block">
+                  <PaginationButtons currentPage={currentPage} totalPages={totalPages} updatePage={handlePageUpdate} />
+                </div>
+              )
+            }
+
+          </>
         )}
       </div>
     </main>

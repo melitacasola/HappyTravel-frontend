@@ -1,7 +1,5 @@
-"use client";
-import { useState, useEffect } from "react";
+
 import DestinationCard from "./DestinationCard";
-import { getDestinations, checkUserSession } from "../../services/axios";
 import { filterData } from "@/app/utils/filterData";
 
 const Destinations = ({ destinations, query }) => {
